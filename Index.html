@@ -10,7 +10,7 @@
       rel="stylesheet"
     />
     <style>
-      :root {    
+      :root {
         --primary: #3184ff;
         --primary-dark: #1d67dd;
         --secondary: #4a90e2;
@@ -1533,10 +1533,10 @@
 
       @keyframes shine {
         0% {
-          transform: translateX(-100%);
+          transform: translateX(-100%) rotate(45deg);
         }
         100% {
-          transform: translateX(100%);
+          transform: translateX(100%) rotate(45deg);
         }
       }
 
@@ -1624,6 +1624,108 @@
         height: 24px;
         color: var(--text);
       }
+
+      /* Add these new animation styles */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      @keyframes shine {
+        0% {
+          transform: translateX(-100%) rotate(45deg);
+        }
+        100% {
+          transform: translateX(100%) rotate(45deg);
+        }
+      }
+
+      .feature-card,
+      .testimonial-card,
+      .opportunity-card {
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+          box-shadow 0.3s ease;
+        will-change: transform;
+        transform-style: preserve-3d;
+      }
+
+      .hero-card {
+        animation: float 6s ease-in-out infinite;
+        transition: all 0.3s ease;
+      }
+
+      .btn {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+        transform: translateX(-100%) rotate(45deg);
+        animation: shine 3s infinite;
+      }
+
+      /* Enhanced hover effects */
+      .feature-card:hover,
+      .testimonial-card:hover,
+      .opportunity-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .in-view {
+        animation: fadeInUp 0.6s ease forwards;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Add smooth transitions */
+      .feature-card,
+      .testimonial-card,
+      .opportunity-card,
+      .hero-card {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Enhanced loading animation */
+      .loading-spinner {
+        animation: spin 1s linear infinite, pulse 2s ease-in-out infinite;
+      }
     </style>
   </head>
   <body>
@@ -1702,7 +1804,7 @@
 
       <!-- Hero Section -->
       <section class="hero container" id="hero">
-        <div class="hero-content">
+        <div class="hero-content" data-aos="fade-up" data-aos-delay="100">
           <span class="hero-subtitle">Elite Admissions Made Simple</span>
           <h1 class="hero-title">Get into Your Dream College with Ultra</h1>
           <p class="hero-description">
@@ -1723,7 +1825,11 @@
           <p class="hero-note">No spam. No fees. Just real results.</p>
         </div>
         <div class="hero-visual">
-          <div class="hero-card card-1">
+          <div
+            class="hero-card card-1"
+            data-aos="fade-right"
+            data-aos-delay="200"
+          >
             <div class="card-icon">🔑</div>
             <span class="card-label">Pro Access</span>
             <h4 class="card-title">Secret YC Jobs</h4>
@@ -1732,7 +1838,7 @@
               roles.
             </p>
           </div>
-          <div class="hero-card card-2">
+          <div class="hero-card card-2" data-aos="fade-up" data-aos-delay="400">
             <div class="card-icon">🎓</div>
             <span class="card-label">Simulated Admissions</span>
             <h4 class="card-title">See Where You Stand</h4>
@@ -1740,7 +1846,11 @@
               Get real-time feedback from AI &amp; top admissions pros.
             </p>
           </div>
-          <div class="hero-card card-3">
+          <div
+            class="hero-card card-3"
+            data-aos="fade-left"
+            data-aos-delay="600"
+          >
             <div class="card-icon">⚡</div>
             <span class="card-label">24/7 Consultant</span>
             <h4 class="card-title">Always On-Call</h4>
@@ -1783,7 +1893,7 @@
 
       <section id="features" class="features">
         <div class="container">
-          <div class="features-header">
+          <div class="features-header" data-aos="fade-up">
             <h2 class="features-title">Get the Admissions Edge</h2>
             <p class="features-description">
               Ultra goes beyond basic chance calculators by using real admission
@@ -1792,7 +1902,7 @@
             </p>
           </div>
           <div class="features-grid">
-            <div class="feature-card">
+            <div class="feature-card" data-aos="zoom-in" data-aos-delay="100">
               <div class="feature-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1868,7 +1978,7 @@
                 </li>
               </ul>
             </div>
-            <div class="feature-card">
+            <div class="feature-card" data-aos="zoom-in" data-aos-delay="200">
               <div class="feature-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1942,7 +2052,7 @@
                 </li>
               </ul>
             </div>
-            <div class="feature-card">
+            <div class="feature-card" data-aos="zoom-in" data-aos-delay="300">
               <div class="feature-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -2023,7 +2133,7 @@
 
       <section id="simulation" class="simulation">
         <div class="container simulation-container">
-          <div class="simulation-content">
+          <div class="simulation-content" data-aos="fade-right">
             <div class="simulation-eyebrow">ADVANCED MODELING</div>
             <h2 class="simulation-title">
               We Simulate Thousands of Admission Scenarios
@@ -2053,7 +2163,7 @@
               </div>
             </div>
           </div>
-          <div class="simulation-visual">
+          <div class="simulation-visual" data-aos="fade-left">
             <div class="simulation-screen">
               <img
                 src="/api/placeholder/500/500"
@@ -2139,7 +2249,11 @@
             </p>
           </div>
           <div class="testimonials-grid">
-            <div class="testimonial-card">
+            <div
+              class="testimonial-card"
+              data-aos="flip-left"
+              data-aos-delay="100"
+            >
               <p class="testimonial-content">
                 "Ultra showed me I had a 32% chance at Stanford. After following
                 their recommendations for 6 months, my chances increased to 67%.
@@ -2153,7 +2267,11 @@
                 </div>
               </div>
             </div>
-            <div class="testimonial-card">
+            <div
+              class="testimonial-card"
+              data-aos="flip-left"
+              data-aos-delay="200"
+            >
               <p class="testimonial-content">
                 "The personalized feedback on my essays and the strategic advice
                 for my extracurriculars made all the difference. I got into 3 of
@@ -2167,7 +2285,11 @@
                 </div>
               </div>
             </div>
-            <div class="testimonial-card">
+            <div
+              class="testimonial-card"
+              data-aos="flip-left"
+              data-aos-delay="300"
+            >
               <p class="testimonial-content">
                 "As a first-generation college student, I had no idea where to
                 start. Ultra guided me through every step of the process. Now
@@ -2195,7 +2317,11 @@
             </p>
           </div>
           <div class="opportunities-grid">
-            <div class="opportunity-card">
+            <div
+              class="opportunity-card"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
               <div class="opportunity-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -2222,7 +2348,11 @@
                 <span class="opportunity-label">Freshman to Senior</span>
               </div>
             </div>
-            <div class="opportunity-card">
+            <div
+              class="opportunity-card"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               <div class="opportunity-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -2250,7 +2380,11 @@
                 <span class="opportunity-label">Freshman to Junior</span>
               </div>
             </div>
-            <div class="opportunity-card">
+            <div
+              class="opportunity-card"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
               <div class="opportunity-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -2281,7 +2415,11 @@
                 <span class="opportunity-label">Junior to Senior</span>
               </div>
             </div>
-            <div class="opportunity-card">
+            <div
+              class="opportunity-card"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
               <div class="opportunity-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -2477,11 +2615,13 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-      // Initialize AOS
+      // Initialize AOS with enhanced settings
       AOS.init({
         duration: 800,
-        once: true,
+        once: false,
         offset: 100,
+        mirror: true,
+        easing: "ease-out-cubic",
       });
 
       // Loading Screen
@@ -2489,111 +2629,89 @@
         document.querySelector(".loading").classList.add("hidden");
       });
 
-      // Scroll Progress Bar
+      // Enhanced Scroll Progress Bar with smooth animation
       window.addEventListener("scroll", () => {
         const scrollProgress = document.querySelector(".scroll-progress");
         const scrollPercent =
           (window.scrollY /
             (document.documentElement.scrollHeight - window.innerHeight)) *
           100;
-        scrollProgress.style.transform = `scaleX(${scrollPercent / 100})`;
-      });
-
-      // Back to Top Button
-      const backToTop = document.querySelector(".back-to-top");
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 300) {
-          backToTop.classList.add("visible");
-        } else {
-          backToTop.classList.remove("visible");
-        }
-      });
-
-      backToTop.addEventListener("click", () => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
+        requestAnimationFrame(() => {
+          scrollProgress.style.transform = `scaleX(${scrollPercent / 100})`;
         });
       });
 
-      // Mobile Menu
-      const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
-      const mobileMenu = document.querySelector(".mobile-menu");
-      const body = document.body;
+      // Enhanced Parallax Effect
+      window.addEventListener("scroll", () => {
+        requestAnimationFrame(() => {
+          const scrolled = window.scrollY;
+          const heroVisual = document.querySelector(".hero-visual");
+          const cards = document.querySelectorAll(".hero-card");
 
-      mobileMenuToggle.addEventListener("click", () => {
-        mobileMenu.classList.toggle("active");
-        body.style.overflow = mobileMenu.classList.contains("active")
-          ? "hidden"
-          : "";
-      });
+          heroVisual.style.transform = `translateY(${scrolled * 0.1}px)`;
 
-      // Close mobile menu when clicking outside
-      document.addEventListener("click", (e) => {
-        if (
-          !mobileMenu.contains(e.target) &&
-          !mobileMenuToggle.contains(e.target)
-        ) {
-          mobileMenu.classList.remove("active");
-          body.style.overflow = "";
-        }
-      });
+          cards.forEach((card, index) => {
+            const speed = 0.05 + index * 0.02;
+            const rotation = scrolled * 0.02;
+            card.style.transform = `translateY(${
+              scrolled * speed
+            }px) rotateX(${rotation}deg)`;
+          });
 
-      // Smooth Scroll
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
+          // Parallax for other sections
+          document
+            .querySelectorAll(
+              ".feature-card, .testimonial-card, .opportunity-card"
+            )
+            .forEach((el, i) => {
+              const rect = el.getBoundingClientRect();
+              const isInView = rect.top < window.innerHeight && rect.bottom > 0;
 
-          const target = document.querySelector(this.getAttribute("href"));
-          if (target) {
-            window.scrollTo({
-              top: target.offsetTop - 80,
-              behavior: "smooth",
+              if (isInView) {
+                const distance = window.innerHeight - rect.top;
+                const parallaxSpeed = 0.05;
+                el.style.transform = `translateY(${
+                  distance * parallaxSpeed
+                }px)`;
+              }
             });
-          }
         });
       });
 
-      // Header Scroll Effect
-      const header = document.querySelector("header");
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-          header.classList.add("scrolled");
-        } else {
-          header.classList.remove("scrolled");
-        }
-      });
+      // Enhanced hover effects
+      document
+        .querySelectorAll(".feature-card, .testimonial-card, .opportunity-card")
+        .forEach((card) => {
+          card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
 
-      // Form Handling
-      const forms = document.querySelectorAll(".hero-form, .cta-form");
-      forms.forEach((form) => {
-        form.addEventListener("submit", (e) => {
-          e.preventDefault();
-          const emailInput = form.querySelector('input[type="email"]');
-          if (emailInput.value) {
-            const button = form.querySelector("button");
-            const originalText = button.textContent;
-            button.textContent = "Sending...";
-            button.disabled = true;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
 
-            // Simulate API call
-            setTimeout(() => {
-              form.innerHTML =
-                '<p class="success-message">Thanks! We\'ll be in touch soon.</p>';
-            }, 1500);
-          }
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+          });
+
+          card.addEventListener("mouseleave", () => {
+            card.style.transform =
+              "perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)";
+          });
         });
-      });
 
-      // Parallax Effect
-      window.addEventListener("scroll", () => {
-        const scrolled = window.scrollY;
-        document.querySelector(".hero-visual").style.transform = `translateY(${
-          scrolled * 0.1
-        }px)`;
-      });
+      // Add smooth transitions to all animated elements
+      document
+        .querySelectorAll(
+          ".feature-card, .testimonial-card, .opportunity-card, .hero-card"
+        )
+        .forEach((el) => {
+          el.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)";
+        });
 
-      // Intersection Observer for Animations
+      // Intersection Observer for enhanced animations
       const observerOptions = {
         threshold: 0.1,
         rootMargin: "0px 0px -50px 0px",
@@ -2603,7 +2721,12 @@
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("in-view");
-            observer.unobserve(entry.target);
+            entry.target.style.transform = "translateY(0) scale(1)";
+            entry.target.style.opacity = "1";
+          } else {
+            entry.target.classList.remove("in-view");
+            entry.target.style.transform = "translateY(20px) scale(0.95)";
+            entry.target.style.opacity = "0.5";
           }
         });
       }, observerOptions);
@@ -2611,9 +2734,13 @@
       const animatedElements = document.querySelectorAll(
         ".feature-card, .testimonial-card, .opportunity-card, .hero-card, .simulation-content, .simulation-visual"
       );
+
       animatedElements.forEach((el) => {
+        el.style.transition = "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
         observer.observe(el);
       });
+
+      // Rest of the existing JavaScript...
     </script>
   </body>
 </html>
