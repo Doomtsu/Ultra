@@ -1,0 +1,2619 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ultra | Elite College Admissions Platform</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #3184ff;
+        --primary-dark: #1d67dd;
+        --secondary: #4a90e2;
+        --background: #040b14;
+        --text: #fff;
+        --text-secondary: rgba(255, 255, 255, 0.7);
+        --card-bg: rgba(10, 23, 42, 0.8);
+        --gradient-1: linear-gradient(90deg, #3184ff 0%, #1d67dd 100%);
+        --gradient-2: linear-gradient(90deg, #fff 0%, #b3d2ff 100%);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      body {
+        background-color: var(--background);
+        color: var(--text);
+        overflow-x: hidden;
+        background-image: radial-gradient(
+            2px 2px at 20px 30px,
+            rgba(255, 255, 255, 0.6),
+            rgba(0, 0, 0, 0)
+          ),
+          radial-gradient(
+            2px 2px at 40px 70px,
+            rgba(255, 255, 255, 0.6),
+            rgba(0, 0, 0, 0)
+          ),
+          radial-gradient(
+            2px 2px at 90px 40px,
+            rgba(255, 255, 255, 0.6),
+            rgba(0, 0, 0, 0)
+          ),
+          radial-gradient(
+            2px 2px at 160px 120px,
+            rgba(255, 255, 255, 0.6),
+            rgba(0, 0, 0, 0)
+          );
+        background-repeat: repeat;
+        background-size: 200px 200px;
+      }
+
+      /* Animated Background */
+      .animated-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.5;
+        background: radial-gradient(
+            circle at 20% 20%,
+            rgba(49, 132, 255, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(74, 144, 226, 0.15) 0%,
+            transparent 50%
+          );
+        animation: bgPulse 8s ease-in-out infinite;
+      }
+
+      @keyframes bgPulse {
+        0%,
+        100% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 0.8;
+        }
+      }
+
+      .wrapper {
+        position: relative;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 24px;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Enhanced Header */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(4, 11, 20, 0.8);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      header.scrolled {
+        background: rgba(4, 11, 20, 0.95);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+      }
+
+      .logo {
+        font-size: 32px;
+        font-weight: 800;
+        background: var(--gradient-2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -1px;
+        position: relative;
+      }
+
+      .logo::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--gradient-1);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
+      }
+
+      .logo:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 40px;
+      }
+
+      .nav-link {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 16px;
+        transition: all 0.2s ease;
+        position: relative;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--gradient-1);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: var(--text);
+      }
+
+      .nav-link:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+
+      .nav-actions {
+        display: flex;
+        gap: 16px;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: 0.5s;
+      }
+
+      .btn:hover::before {
+        left: 100%;
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .btn-outline:hover {
+        border-color: var(--secondary);
+        color: var(--secondary);
+        transform: translateY(-2px);
+      }
+
+      .btn-primary {
+        background: var(--gradient-1);
+        color: var(--text);
+        border: none;
+        box-shadow: 0 10px 20px rgba(29, 103, 221, 0.2);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 28px rgba(29, 103, 221, 0.25);
+      }
+
+      /* Enhanced Hero Section */
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 60px;
+        min-height: 100vh;
+        padding: 120px 0 80px;
+        position: relative;
+      }
+
+      .hero-content {
+        max-width: 560px;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-subtitle {
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--secondary);
+        margin-bottom: 16px;
+        display: inline-block;
+        padding: 8px 16px;
+        background: rgba(74, 144, 226, 0.1);
+        border-radius: 100px;
+      }
+
+      .hero-title {
+        font-size: 64px;
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 24px;
+        background: var(--gradient-2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        position: relative;
+      }
+
+      .hero-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100px;
+        height: 4px;
+        background: var(--gradient-1);
+        border-radius: 2px;
+      }
+
+      .hero-description {
+        font-size: 18px;
+        line-height: 1.6;
+        color: var(--text-secondary);
+        margin-bottom: 32px;
+      }
+
+      .hero-form {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 24px;
+        position: relative;
+      }
+
+      .hero-input {
+        flex: 1;
+        padding: 16px 20px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text);
+        font-size: 16px;
+        transition: all 0.3s ease;
+      }
+
+      .hero-input:focus {
+        outline: none;
+        border-color: var(--secondary);
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+      }
+
+      .hero-input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      .hero-note {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .hero-visual {
+        position: relative;
+        height: 100%;
+        min-height: 500px;
+        perspective: 1000px;
+      }
+
+      .hero-card {
+        position: absolute;
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        transition: all 0.4s ease;
+        transform-style: preserve-3d;
+      }
+
+      .hero-card:hover {
+        transform: translateY(-8px) rotateX(5deg);
+        box-shadow: 0 40px 70px rgba(0, 0, 0, 0.4);
+      }
+
+      .hero-card.card-1 {
+        top: 0;
+        left: 0;
+        width: 280px;
+        animation: floatCard1 6s ease-in-out infinite;
+      }
+
+      .hero-card.card-2 {
+        top: 140px;
+        right: 0;
+        width: 320px;
+        z-index: 2;
+        animation: floatCard2 6s ease-in-out infinite;
+      }
+
+      .hero-card.card-3 {
+        bottom: 0;
+        left: 60px;
+        width: 300px;
+        animation: floatCard3 6s ease-in-out infinite;
+      }
+
+      @keyframes floatCard1 {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      @keyframes floatCard2 {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+
+      @keyframes floatCard3 {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-25px);
+        }
+      }
+
+      /* Enhanced Partners Section */
+      .partners {
+        padding: 80px 0;
+        background: rgba(255, 255, 255, 0.02);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .partners::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        margin-bottom: 40px;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 2px;
+        background: var(--gradient-1);
+        border-radius: 1px;
+      }
+
+      .partners-grid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 80px;
+        flex-wrap: wrap;
+        position: relative;
+      }
+
+      .partner-logo {
+        opacity: 0.6;
+        height: 32px;
+        transition: all 0.3s ease;
+        filter: grayscale(100%);
+      }
+
+      .partner-logo:hover {
+        opacity: 1;
+        filter: grayscale(0%);
+        transform: scale(1.1);
+      }
+
+      /* Enhanced Features Section */
+      .features {
+        padding: 120px 0;
+        position: relative;
+      }
+
+      .features-header {
+        max-width: 700px;
+        margin: 0 auto 80px;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      .features-title {
+        font-size: 48px;
+        font-weight: 800;
+        margin-bottom: 20px;
+        background: var(--gradient-2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .features-description {
+        font-size: 18px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+      }
+
+      .feature-card {
+        background: var(--card-bg);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        padding: 32px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(255, 255, 255, 0.05),
+          transparent
+        );
+        transform: translateX(-100%);
+        transition: 0.5s;
+      }
+
+      .feature-card:hover::before {
+        transform: translateX(100%);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        border-color: rgba(74, 144, 226, 0.3);
+      }
+
+      .feature-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+          45deg,
+          rgba(49, 132, 255, 0.1),
+          rgba(49, 132, 255, 0.2)
+        );
+        margin-bottom: 24px;
+        transition: all 0.3s ease;
+      }
+
+      .feature-card:hover .feature-icon {
+        transform: scale(1.1) rotate(5deg);
+      }
+
+      .feature-card h3 {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+
+      .feature-card p {
+        font-size: 16px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+
+      .feature-list {
+        list-style: none;
+      }
+
+      .feature-list li {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 12px;
+        color: var(--text-secondary);
+        font-size: 15px;
+        transition: all 0.3s ease;
+      }
+
+      .feature-list li:hover {
+        color: var(--text);
+        transform: translateX(5px);
+      }
+
+      .feature-list li svg {
+        flex-shrink: 0;
+        margin-top: 3px;
+      }
+
+      /* Enhanced Simulation Section */
+      .simulation {
+        padding: 120px 0;
+        position: relative;
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .simulation-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .simulation-content {
+        max-width: 520px;
+      }
+
+      .simulation-eyebrow {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--secondary);
+        margin-bottom: 16px;
+        letter-spacing: 1px;
+        display: inline-block;
+        padding: 8px 16px;
+        background: rgba(74, 144, 226, 0.1);
+        border-radius: 100px;
+      }
+
+      .simulation-title {
+        font-size: 40px;
+        font-weight: 800;
+        margin-bottom: 24px;
+        line-height: 1.2;
+        background: var(--gradient-2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .simulation-description {
+        font-size: 18px;
+        line-height: 1.6;
+        color: var(--text-secondary);
+        margin-bottom: 32px;
+      }
+
+      .simulation-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        margin-top: 40px;
+      }
+
+      .stat-item {
+        background: var(--card-bg);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .stat-item:hover {
+        transform: translateY(-5px);
+        border-color: rgba(74, 144, 226, 0.3);
+      }
+
+      .stat-value {
+        font-size: 36px;
+        font-weight: 800;
+        margin-bottom: 8px;
+        background: var(--gradient-1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .stat-label {
+        font-size: 14px;
+        color: var(--text-secondary);
+      }
+
+      .simulation-visual {
+        position: relative;
+        height: 500px;
+        perspective: 1000px;
+      }
+
+      .simulation-screen {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+        transform-style: preserve-3d;
+        transition: all 0.5s ease;
+      }
+
+      .simulation-screen:hover {
+        transform: rotateX(5deg) rotateY(5deg);
+      }
+
+      /* Enhanced Comparison Section */
+      .comparison {
+        padding: 120px 0;
+        background: linear-gradient(
+          180deg,
+          rgba(10, 23, 42, 0) 0%,
+          rgba(10, 23, 42, 0.4) 100%
+        );
+        position: relative;
+      }
+
+      .comparison-header {
+        max-width: 700px;
+        margin: 0 auto 80px;
+        text-align: center;
+      }
+
+      .comparison-title {
+        font-size: 40px;
+        font-weight: 800;
+        margin-bottom: 20px;
+        background: var(--gradient-2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .comparison-description {
+        font-size: 18px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+
+      .comparison-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        overflow: hidden;
+        border-radius: 16px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        background: var(--card-bg);
+      }
+
+      .comparison-table th {
+        padding: 24px;
+        text-align: left;
+        background: rgba(10, 23, 42, 0.7);
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .comparison-table th:first-child {
+        width: 40%;
+        border-top-left-radius: 16px;
+      }
+
+      .comparison-table th:last-child {
+        border-top-right-radius: 16px;
+        background: linear-gradient(
+          45deg,
+          rgba(49, 132, 255, 0.2),
+          rgba(10, 23, 42, 0.7)
+        );
+        color: var(--secondary);
+      }
+
+      .comparison-table tr:nth-child(odd) td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .comparison-table tr:last-child td:first-child {
+        border-bottom-left-radius: 16px;
+      }
+
+      .comparison-table tr:last-child td:last-child {
+        border-bottom-right-radius: 16px;
+      }
+
+      .comparison-table td {
+        padding: 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        font-size: 15px;
+        color: var(--text-secondary);
+        transition: all 0.3s ease;
+      }
+
+      .comparison-table td:last-child {
+        color: var(--text);
+        font-weight: 500;
+        background-color: rgba(49, 132, 255, 0.05);
+      }
+
+      .comparison-table tr:hover td {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .checkmark {
+        color: #4ade80;
+        margin-right: 8px;
+      }
+
+      .x-mark {
+        color: #f87171;
+        margin-right: 8px;
+      }
+
+      /* Enhanced Testimonials Section */
+      .testimonials {
+        padding: 120px 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .testimonials-header {
+        max-width: 700px;
+        margin: 0 auto 80px;
+        text-align: center;
+      }
+
+      .testimonials-title {
+        font-size: 40px;
+        font-weight: 800;
+        margin-bottom: 20px;
+        background: var(--gradient-2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .testimonials-description {
+        font-size: 18px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+
+      .testimonial-card {
+        background: var(--card-bg);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        padding: 32px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .testimonial-card::before {
+        content: '"';
+        position: absolute;
+        top: -20px;
+        left: 20px;
+        font-size: 120px;
+        color: rgba(74, 144, 226, 0.1);
+        font-family: serif;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        border-color: rgba(74, 144, 226, 0.3);
+      }
+
+      .testimonial-content {
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--text-secondary);
+        margin-bottom: 24px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .testimonial-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 16px;
+        background: linear-gradient(
+          45deg,
+          rgba(49, 132, 255, 0.2),
+          rgba(74, 144, 226, 0.2)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: var(--text);
+        transition: all 0.3s ease;
+      }
+
+      .testimonial-card:hover .testimonial-avatar {
+        transform: scale(1.1);
+      }
+
+      .testimonial-info h4 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+
+      .testimonial-info p {
+        font-size: 14px;
+        color: var(--text-secondary);
+      }
+
+      /* Enhanced Opportunities Section */
+      .opportunities {
+        padding: 120px 0;
+        background: linear-gradient(
+          180deg,
+          rgba(10, 23, 42, 0) 0%,
+          rgba(10, 23, 42, 0.3) 100%
+        );
+        position: relative;
+      }
+
+      .opportunities-header {
+        max-width: 700px;
+        margin: 0 auto 80px;
+        text-align: center;
+      }
+
+      .opportunities-title {
+        font-size: 40px;
+        font-weight: 800;
+        margin-bottom: 20px;
+        background: var(--gradient-2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .opportunities-description {
+        font-size: 18px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+
+      .opportunities-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+
+      .opportunity-card {
+        background: var(--card-bg);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        padding: 32px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: flex-start;
+        gap: 24px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .opportunity-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(255, 255, 255, 0.05),
+          transparent
+        );
+        transform: translateX(-100%);
+        transition: 0.5s;
+      }
+
+      .opportunity-card:hover::before {
+        transform: translateX(100%);
+      }
+
+      .opportunity-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        border-color: rgba(74, 144, 226, 0.3);
+      }
+
+      .opportunity-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 16px;
+        background: linear-gradient(
+          45deg,
+          rgba(49, 132, 255, 0.1),
+          rgba(49, 132, 255, 0.2)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+      }
+
+      .opportunity-card:hover .opportunity-icon {
+        transform: scale(1.1) rotate(5deg);
+      }
+
+      .opportunity-content h3 {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .opportunity-content p {
+        font-size: 15px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 16px;
+      }
+
+      .opportunity-label {
+        display: inline-block;
+        padding: 6px 12px;
+        background: rgba(74, 144, 226, 0.1);
+        border-radius: 100px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--secondary);
+        transition: all 0.3s ease;
+      }
+
+      .opportunity-card:hover .opportunity-label {
+        background: rgba(74, 144, 226, 0.2);
+      }
+
+      /* Enhanced CTA Section */
+      .cta {
+        padding: 120px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-content {
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+      }
+
+      .cta-title {
+        font-size: 48px;
+        font-weight: 800;
+        margin-bottom: 24px;
+        background: var(--gradient-2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .cta-description {
+        font-size: 18px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 40px;
+      }
+
+      .cta-form {
+        display: flex;
+        gap: 12px;
+        max-width: 500px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .cta-input {
+        flex: 1;
+        padding: 16px 24px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text);
+        font-size: 16px;
+        transition: all 0.3s ease;
+      }
+
+      .cta-input:focus {
+        outline: none;
+        border-color: var(--secondary);
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+      }
+
+      .cta-input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      /* Enhanced Footer */
+      footer {
+        padding: 80px 0 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        position: relative;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 60px;
+      }
+
+      .footer-brand {
+        max-width: 320px;
+      }
+
+      .footer-logo {
+        font-size: 24px;
+        font-weight: 800;
+        background: var(--gradient-2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 16px;
+      }
+
+      .footer-tagline {
+        font-size: 14px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+
+      .footer-social {
+        display: flex;
+        gap: 16px;
+      }
+
+      .footer-social a {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .footer-social a::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-1);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .footer-social a:hover {
+        transform: translateY(-3px);
+      }
+
+      .footer-social a:hover::before {
+        opacity: 1;
+      }
+
+      .footer-social svg {
+        width: 18px;
+        height: 18px;
+        color: var(--text);
+        position: relative;
+        z-index: 1;
+      }
+
+      .footer-nav h4 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: var(--text);
+      }
+
+      .footer-nav ul {
+        list-style: none;
+      }
+
+      .footer-nav li {
+        margin-bottom: 12px;
+      }
+
+      .footer-nav a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .footer-nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--gradient-1);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
+      }
+
+      .footer-nav a:hover {
+        color: var(--text);
+      }
+
+      .footer-nav a:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .footer-copyright {
+        font-size: 14px;
+        color: var(--text-secondary);
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 24px;
+      }
+
+      .footer-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--text);
+      }
+
+      /* Mobile Menu */
+      .mobile-menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--text);
+        cursor: pointer;
+        padding: 8px;
+        z-index: 1000;
+      }
+
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 400px;
+        height: 100vh;
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        padding: 80px 40px;
+        transition: right 0.3s ease;
+        z-index: 999;
+        overflow-y: auto;
+      }
+
+      .mobile-menu.active {
+        right: 0;
+      }
+
+      .mobile-menu .nav-links {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .mobile-menu .nav-actions {
+        flex-direction: column;
+        margin-top: 40px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1100px) {
+        .nav-links {
+          display: none;
+        }
+
+        .mobile-menu-toggle {
+          display: block;
+        }
+
+        .hero {
+          grid-template-columns: 1fr;
+          gap: 80px;
+        }
+
+        .hero-content {
+          max-width: 100%;
+          text-align: center;
+        }
+
+        .hero-form {
+          max-width: 500px;
+          margin: 0 auto 24px;
+        }
+
+        .hero-visual {
+          margin: 0 auto;
+          max-width: 600px;
+        }
+
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .simulation-container {
+          grid-template-columns: 1fr;
+          gap: 60px;
+        }
+
+        .simulation-content {
+          max-width: 100%;
+        }
+
+        .simulation-visual {
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .testimonials-grid,
+        .opportunities-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 40px;
+        }
+
+        .hero-form {
+          flex-direction: column;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .comparison-table th:first-child,
+        .comparison-table td:first-child {
+          display: none;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          gap: 20px;
+          text-align: center;
+        }
+
+        .footer-links {
+          flex-direction: column;
+          gap: 16px;
+          align-items: center;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .hero-title {
+          font-size: 32px;
+        }
+
+        .hero-description {
+          font-size: 16px;
+        }
+
+        .btn {
+          padding: 10px 20px;
+          font-size: 14px;
+        }
+
+        .nav-actions {
+          gap: 8px;
+        }
+
+        .card-title {
+          font-size: 16px;
+        }
+
+        .card-content {
+          font-size: 13px;
+        }
+
+        .hero-card.card-1,
+        .hero-card.card-2,
+        .hero-card.card-3 {
+          width: 85%;
+          position: relative;
+          margin: 20px auto;
+          top: unset;
+          bottom: unset;
+          left: unset;
+          right: unset;
+        }
+
+        .hero-visual {
+          display: flex;
+          flex-direction: column;
+          min-height: unset;
+        }
+
+        .features-title,
+        .simulation-title,
+        .comparison-title,
+        .testimonials-title,
+        .opportunities-title,
+        .cta-title {
+          font-size: 32px;
+        }
+
+        .features-description,
+        .simulation-description,
+        .comparison-description,
+        .testimonials-description,
+        .opportunities-description,
+        .cta-description {
+          font-size: 16px;
+        }
+
+        .simulation-stats {
+          grid-template-columns: 1fr;
+        }
+
+        .comparison-table {
+          font-size: 14px;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+          padding: 16px;
+        }
+
+        .testimonial-card,
+        .opportunity-card,
+        .feature-card {
+          padding: 24px;
+        }
+
+        .opportunity-card {
+          flex-direction: column;
+        }
+
+        .opportunity-icon {
+          margin-bottom: 16px;
+        }
+      }
+
+      /* Animations */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      @keyframes shine {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      /* Loading Animation */
+      .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--background);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease;
+      }
+
+      .loading.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        border-top-color: var(--primary);
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Scroll Progress Bar */
+      .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        transform-origin: 0%;
+        transform: scaleX(0);
+        z-index: 1000;
+        transition: transform 0.1s ease;
+      }
+
+      /* Back to Top Button */
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: var(--gradient-1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 1000;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .back-to-top svg {
+        width: 24px;
+        height: 24px;
+        color: var(--text);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div class="loading">
+      <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M18 15l-6-6-6 6" />
+      </svg>
+    </div>
+
+    <div class="wrapper">
+      <!-- Animated Background -->
+      <div class="animated-bg"></div>
+
+      <!-- Header -->
+      <header>
+        <div class="container header-content">
+          <div class="logo">ULTRA</div>
+          <nav class="nav-links">
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#simulation" class="nav-link">Simulation</a>
+            <a href="#comparison" class="nav-link">Comparison</a>
+            <a href="#opportunities" class="nav-link">Opportunities</a>
+          </nav>
+          <div class="nav-actions">
+            <button class="btn btn-outline">Sign In</button>
+            <button class="btn btn-primary">Get Started</button>
+          </div>
+          <button class="mobile-menu-toggle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu">
+        <nav class="nav-links">
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#simulation" class="nav-link">Simulation</a>
+          <a href="#comparison" class="nav-link">Comparison</a>
+          <a href="#opportunities" class="nav-link">Opportunities</a>
+        </nav>
+        <div class="nav-actions">
+          <button class="btn btn-outline">Sign In</button>
+          <button class="btn btn-primary">Get Started</button>
+        </div>
+      </div>
+
+      <!-- Hero Section -->
+      <section class="hero container" id="hero">
+        <div class="hero-content">
+          <span class="hero-subtitle">Elite Admissions Made Simple</span>
+          <h1 class="hero-title">Get into Your Dream College with Ultra</h1>
+          <p class="hero-description">
+            Like a $20k/year admissions consultant, but
+            <strong>better</strong> and <strong>free</strong>. Ultra connects
+            you with real CEOs, secret YC opportunities, and a 24/7 consultant
+            that's always on your side.
+          </p>
+          <form class="hero-form">
+            <input
+              type="email"
+              class="hero-input"
+              placeholder="Enter your email to get started"
+              required
+            />
+            <button class="btn btn-primary" type="submit">Start Now</button>
+          </form>
+          <p class="hero-note">No spam. No fees. Just real results.</p>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-card card-1">
+            <div class="card-icon">🔑</div>
+            <span class="card-label">Pro Access</span>
+            <h4 class="card-title">Secret YC Jobs</h4>
+            <p class="card-content">
+              We unlock 3,000+ exclusive extracurriculars and hidden startup
+              roles.
+            </p>
+          </div>
+          <div class="hero-card card-2">
+            <div class="card-icon">🎓</div>
+            <span class="card-label">Simulated Admissions</span>
+            <h4 class="card-title">See Where You Stand</h4>
+            <p class="card-content">
+              Get real-time feedback from AI &amp; top admissions pros.
+            </p>
+          </div>
+          <div class="hero-card card-3">
+            <div class="card-icon">⚡</div>
+            <span class="card-label">24/7 Consultant</span>
+            <h4 class="card-title">Always On-Call</h4>
+            <p class="card-content">
+              Never stress alone. Ultra is by your side for pep talks &amp;
+              strategy.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="partners">
+        <div class="container">
+          <h2 class="section-title">Trusted by students admitted to</h2>
+          <div class="partners-grid">
+            <img
+              src="/api/placeholder/120/40"
+              alt="Harvard University"
+              class="partner-logo"
+            />
+            <img
+              src="/api/placeholder/120/40"
+              alt="Stanford University"
+              class="partner-logo"
+            />
+            <img src="/api/placeholder/120/40" alt="MIT" class="partner-logo" />
+            <img
+              src="/api/placeholder/120/40"
+              alt="Yale University"
+              class="partner-logo"
+            />
+            <img
+              src="/api/placeholder/120/40"
+              alt="Princeton University"
+              class="partner-logo"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="features">
+        <div class="container">
+          <div class="features-header">
+            <h2 class="features-title">Get the Admissions Edge</h2>
+            <p class="features-description">
+              Ultra goes beyond basic chance calculators by using real admission
+              data and advanced AI to provide accurate predictions and
+              personalized guidance.
+            </p>
+          </div>
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#4A90E2"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 3v18h18"></path>
+                  <path d="M18.4 9a9 9 0 0 0-9.19 10H8"></path>
+                  <path
+                    d="M14.7 15h-2.2a2 2 0 0 0-2 2v1h6v-1a2 2 0 0 0-2-2z"
+                  ></path>
+                </svg>
+              </div>
+              <h3>AI-Powered Predictions</h3>
+              <p>
+                Our proprietary algorithm analyzes 250,000+ past applications to
+                predict your chances with over 90% accuracy.
+              </p>
+              <ul class="feature-list">
+                <li>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#4ADE80"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Holistic profile evaluation
+                </li>
+                <li>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#4ADE80"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  School-specific insights
+                </li>
+                <li>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#4ADE80"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Continuously updated models
+                </li>
+              </ul>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#4A90E2"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+              </div>
+              <h3>Personalized Guidance</h3>
+              <p>
+                Get tailored recommendations to maximize your chances based on
+                your unique profile and target schools.
+              </p>
+              <ul class="feature-list">
+                <li>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#4ADE80"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Profile strength analysis
+                </li>
+                <li>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#4ADE80"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Strategic improvement plan
+                </li>
+                <li>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#4ADE80"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Deadline reminders
+                </li>
+              </ul>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#4A90E2"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <h3>Expert Community</h3>
+              <p>
+                Connect with admissions consultants and successful students who
+                can review your application.
+              </p>
+              <ul class="feature-list">
+                <li>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#4ADE80"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Essay feedback
+                </li>
+                <li>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#4ADE80"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Live Q&A sessions
+                </li>
+                <li>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#4ADE80"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  School-specific forums
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="simulation" class="simulation">
+        <div class="container simulation-container">
+          <div class="simulation-content">
+            <div class="simulation-eyebrow">ADVANCED MODELING</div>
+            <h2 class="simulation-title">
+              We Simulate Thousands of Admission Scenarios
+            </h2>
+            <p class="simulation-description">
+              Our algorithm runs your profile through thousands of simulated
+              admission committees, analyzing how different aspects of your
+              application affect your chances.
+            </p>
+            <button class="btn btn-primary">See How It Works</button>
+            <div class="simulation-stats">
+              <div class="stat-item">
+                <div class="stat-value">98%</div>
+                <div class="stat-label">Model Accuracy for Top 20 Schools</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">400+</div>
+                <div class="stat-label">Universities in Our Database</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">15k+</div>
+                <div class="stat-label">Success Stories</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">43%</div>
+                <div class="stat-label">Average Improvement in Chances</div>
+              </div>
+            </div>
+          </div>
+          <div class="simulation-visual">
+            <div class="simulation-screen">
+              <img
+                src="/api/placeholder/500/500"
+                alt="Ultra simulation screen"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  border-radius: 16px;
+                "
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="comparison" class="comparison">
+        <div class="container">
+          <div class="comparison-header">
+            <h2 class="comparison-title">How Ultra Compares</h2>
+            <p class="comparison-description">
+              See why thousands of students choose Ultra over traditional
+              college counseling and generic calculators.
+            </p>
+          </div>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Features</th>
+                <th>Traditional Counselors</th>
+                <th>Generic Calculators</th>
+                <th>Ultra Platform</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Personalized Admission Chances</td>
+                <td><span class="x-mark">✕</span> Subjective</td>
+                <td><span class="x-mark">✕</span> Basic</td>
+                <td><span class="checkmark">✓</span> AI-Powered</td>
+              </tr>
+              <tr>
+                <td>Cost</td>
+                <td><span class="x-mark">✕</span> $3,000-10,000</td>
+                <td><span class="checkmark">✓</span> Free/Limited</td>
+                <td><span class="checkmark">✓</span> Affordable</td>
+              </tr>
+              <tr>
+                <td>Real-time Updates</td>
+                <td><span class="x-mark">✕</span> No</td>
+                <td><span class="x-mark">✕</span> No</td>
+                <td><span class="checkmark">✓</span> Yes</td>
+              </tr>
+              <tr>
+                <td>Application Strategy</td>
+                <td><span class="checkmark">✓</span> Limited</td>
+                <td><span class="x-mark">✕</span> None</td>
+                <td><span class="checkmark">✓</span> Comprehensive</td>
+              </tr>
+              <tr>
+                <td>School-Specific Insights</td>
+                <td><span class="x-mark">✕</span> Varies</td>
+                <td><span class="x-mark">✕</span> No</td>
+                <td><span class="checkmark">✓</span> Yes</td>
+              </tr>
+              <tr>
+                <td>Essay Support</td>
+                <td><span class="checkmark">✓</span> Yes</td>
+                <td><span class="x-mark">✕</span> No</td>
+                <td><span class="checkmark">✓</span> Yes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="testimonials" class="testimonials">
+        <div class="container">
+          <div class="testimonials-header">
+            <h2 class="testimonials-title">Success Stories</h2>
+            <p class="testimonials-description">
+              Hear from students who used Ultra to get into their dream schools.
+            </p>
+          </div>
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <p class="testimonial-content">
+                "Ultra showed me I had a 32% chance at Stanford. After following
+                their recommendations for 6 months, my chances increased to 67%.
+                I got in early decision!"
+              </p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">JL</div>
+                <div class="testimonial-info">
+                  <h4>Jessica L.</h4>
+                  <p>Stanford University '26</p>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <p class="testimonial-content">
+                "The personalized feedback on my essays and the strategic advice
+                for my extracurriculars made all the difference. I got into 3 of
+                my reach schools."
+              </p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">MR</div>
+                <div class="testimonial-info">
+                  <h4>Michael R.</h4>
+                  <p>Princeton University '25</p>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <p class="testimonial-content">
+                "As a first-generation college student, I had no idea where to
+                start. Ultra guided me through every step of the process. Now
+                I'm at my dream school with a scholarship!"
+              </p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">AT</div>
+                <div class="testimonial-info">
+                  <h4>Aisha T.</h4>
+                  <p>Duke University '26</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="opportunities">
+        <div class="container">
+          <div class="opportunities-header">
+            <h2 class="opportunities-title">Every Step of Your Journey</h2>
+            <p class="opportunities-description">
+              Ultra provides the tools and guidance you need at each stage of
+              the college application process.
+            </p>
+          </div>
+          <div class="opportunities-grid">
+            <div class="opportunity-card">
+              <div class="opportunity-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#4A90E2"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                </svg>
+              </div>
+              <div class="opportunity-content">
+                <h3>Essay Development</h3>
+                <p>
+                  Get AI-powered analysis of your essays, personalized feedback
+                  from successful students, and expert tips to make your writing
+                  stand out.
+                </p>
+                <span class="opportunity-label">Freshman to Senior</span>
+              </div>
+            </div>
+            <div class="opportunity-card">
+              <div class="opportunity-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#4A90E2"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="8" r="7"></circle>
+                  <polyline
+                    points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"
+                  ></polyline>
+                </svg>
+              </div>
+              <div class="opportunity-content">
+                <h3>Extracurricular Strategy</h3>
+                <p>
+                  Discover which activities will have the biggest impact on your
+                  applications based on your interests and target schools.
+                </p>
+                <span class="opportunity-label">Freshman to Junior</span>
+              </div>
+            </div>
+            <div class="opportunity-card">
+              <div class="opportunity-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#4A90E2"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                  ></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+              </div>
+              <div class="opportunity-content">
+                <h3>Application Management</h3>
+                <p>
+                  Stay on top of deadlines, requirements, and materials with our
+                  comprehensive tracking system and reminders.
+                </p>
+                <span class="opportunity-label">Junior to Senior</span>
+              </div>
+            </div>
+            <div class="opportunity-card">
+              <div class="opportunity-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#4A90E2"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                  ></polygon>
+                </svg>
+              </div>
+              <div class="opportunity-content">
+                <h3>School Selection</h3>
+                <p>
+                  Find your perfect match schools based on your profile,
+                  preferences, and admission chances. Build a balanced college
+                  list.
+                </p>
+                <span class="opportunity-label">Sophomore to Senior</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta">
+        <div class="container">
+          <div class="cta-content">
+            <h2 class="cta-title">Start Your Path to Your Dream School</h2>
+            <p class="cta-description">
+              Join over 25,000 students who have used Ultra to improve their
+              college admission chances. Get your free prediction today.
+            </p>
+            <div class="cta-form">
+              <input
+                type="email"
+                class="cta-input"
+                placeholder="Enter your email address"
+              />
+              <button class="btn btn-primary">Get Started</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="container">
+          <div class="footer-grid">
+            <div class="footer-brand">
+              <div class="footer-logo">Ultra</div>
+              <p class="footer-tagline">
+                Using AI and data to democratize elite college admissions for
+                ambitious students everywhere.
+              </p>
+              <div class="footer-social">
+                <a href="#">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                    ></path>
+                  </svg>
+                </a>
+                <a href="#">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect
+                      x="2"
+                      y="2"
+                      width="20"
+                      height="20"
+                      rx="5"
+                      ry="5"
+                    ></rect>
+                    <path
+                      d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                    ></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                </a>
+                <a href="#">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
+                    ></path>
+                  </svg>
+                </a>
+                <a href="#">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                    ></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="footer-nav">
+              <h4>Product</h4>
+              <ul>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Success Stories</a></li>
+                <li><a href="#">For Counselors</a></li>
+                <li><a href="#">For Schools</a></li>
+              </ul>
+            </div>
+            <div class="footer-nav">
+              <h4>Resources</h4>
+              <ul>
+                <li><a href="#">College Guide</a></li>
+                <li><a href="#">Essay Examples</a></li>
+                <li><a href="#">Webinars</a></li>
+                <li><a href="#">Blog</a></li>
+                <li></li>
+                <li><a href="#">College Guide</a></li>
+                <li><a href="#">Essay Examples</a></li>
+                <li><a href="#">Webinars</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Admission Calendar</a></li>
+              </ul>
+            </div>
+            <div class="footer-nav">
+              <h4>Company</h4>
+              <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Our Team</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Press</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <div class="footer-copyright">
+              © 2025 Ultra, Inc. All rights reserved.
+            </div>
+            <div class="footer-links">
+              <a href="#">Terms of Service</a>
+              <a href="#">Privacy Policy</a>
+              <a href="#">Cookie Policy</a>
+              <a href="#">Accessibility</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      // Initialize AOS
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100,
+      });
+
+      // Loading Screen
+      window.addEventListener("load", () => {
+        document.querySelector(".loading").classList.add("hidden");
+      });
+
+      // Scroll Progress Bar
+      window.addEventListener("scroll", () => {
+        const scrollProgress = document.querySelector(".scroll-progress");
+        const scrollPercent =
+          (window.scrollY /
+            (document.documentElement.scrollHeight - window.innerHeight)) *
+          100;
+        scrollProgress.style.transform = `scaleX(${scrollPercent / 100})`;
+      });
+
+      // Back to Top Button
+      const backToTop = document.querySelector(".back-to-top");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+          backToTop.classList.add("visible");
+        } else {
+          backToTop.classList.remove("visible");
+        }
+      });
+
+      backToTop.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+
+      // Mobile Menu
+      const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
+      const mobileMenu = document.querySelector(".mobile-menu");
+      const body = document.body;
+
+      mobileMenuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("active");
+        body.style.overflow = mobileMenu.classList.contains("active")
+          ? "hidden"
+          : "";
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (
+          !mobileMenu.contains(e.target) &&
+          !mobileMenuToggle.contains(e.target)
+        ) {
+          mobileMenu.classList.remove("active");
+          body.style.overflow = "";
+        }
+      });
+
+      // Smooth Scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop - 80,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      // Header Scroll Effect
+      const header = document.querySelector("header");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+
+      // Form Handling
+      const forms = document.querySelectorAll(".hero-form, .cta-form");
+      forms.forEach((form) => {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const emailInput = form.querySelector('input[type="email"]');
+          if (emailInput.value) {
+            const button = form.querySelector("button");
+            const originalText = button.textContent;
+            button.textContent = "Sending...";
+            button.disabled = true;
+
+            // Simulate API call
+            setTimeout(() => {
+              form.innerHTML =
+                '<p class="success-message">Thanks! We\'ll be in touch soon.</p>';
+            }, 1500);
+          }
+        });
+      });
+
+      // Parallax Effect
+      window.addEventListener("scroll", () => {
+        const scrolled = window.scrollY;
+        document.querySelector(".hero-visual").style.transform = `translateY(${
+          scrolled * 0.1
+        }px)`;
+      });
+
+      // Intersection Observer for Animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      const animatedElements = document.querySelectorAll(
+        ".feature-card, .testimonial-card, .opportunity-card, .hero-card, .simulation-content, .simulation-visual"
+      );
+      animatedElements.forEach((el) => {
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>
