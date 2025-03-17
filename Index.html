@@ -2217,6 +2217,64 @@
           gap: 24px;
         }
       }
+
+      /* Add these new styles in the CSS section */
+      .partner-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .partner-item:hover {
+        transform: translateY(-5px);
+      }
+
+      .partner-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        background: linear-gradient(
+          135deg,
+          rgba(49, 132, 255, 0.1),
+          rgba(74, 144, 226, 0.05)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        transition: all 0.3s ease;
+      }
+
+      .partner-item:hover .partner-icon {
+        background: linear-gradient(
+          135deg,
+          rgba(49, 132, 255, 0.2),
+          rgba(74, 144, 226, 0.1)
+        );
+        transform: scale(1.1);
+      }
+
+      .partner-item span {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        transition: color 0.3s ease;
+      }
+
+      .partner-item:hover span {
+        color: var(--text);
+      }
+
+      .partners-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 24px;
+        justify-items: center;
+        align-items: center;
+        margin-top: 24px;
+      }
     </style>
   </head>
   <body>
@@ -2373,31 +2431,118 @@
             <div class="partners-column">
               <h2 class="section-title">Trusted by students admitted to</h2>
               <div class="partners-grid">
-                <img
-                  src="https://via.placeholder.com/120x40"
-                  alt="Harvard University"
-                  class="partner-logo"
-                />
-                <img
-                  src="https://via.placeholder.com/120x40"
-                  alt="Stanford University"
-                  class="partner-logo"
-                />
-                <img
-                  src="https://via.placeholder.com/120x40"
-                  alt="MIT"
-                  class="partner-logo"
-                />
-                <img
-                  src="https://via.placeholder.com/120x40"
-                  alt="Yale University"
-                  class="partner-logo"
-                />
-                <img
-                  src="https://via.placeholder.com/120x40"
-                  alt="Princeton University"
-                  class="partner-logo"
-                />
+                <div class="partner-item">
+                  <div class="partner-icon">
+                    <svg
+                      width="40"
+                      height="40"
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M20 5L4 12L20 19L36 12L20 5Z"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                      <path
+                        d="M10 15V25M30 15V25"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                      <path
+                        d="M4 12V28L20 35L36 28V12"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                    </svg>
+                  </div>
+                  <span>Harvard</span>
+                </div>
+                <div class="partner-item">
+                  <div class="partner-icon">
+                    <svg
+                      width="40"
+                      height="40"
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M20 5L4 12L20 19L36 12L20 5Z"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                      <path
+                        d="M10 15V25M30 15V25"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                      <path
+                        d="M4 12V28L20 35L36 28V12"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                    </svg>
+                  </div>
+                  <span>Yale</span>
+                </div>
+                <div class="partner-item">
+                  <div class="partner-icon">
+                    <svg
+                      width="40"
+                      height="40"
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M20 5L4 12L20 19L36 12L20 5Z"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                      <path
+                        d="M10 15V25M30 15V25"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                      <path
+                        d="M4 12V28L20 35L36 28V12"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                    </svg>
+                  </div>
+                  <span>Princeton</span>
+                </div>
+                <div class="partner-item">
+                  <div class="partner-icon">
+                    <svg
+                      width="40"
+                      height="40"
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M20 5L4 12L20 19L36 12L20 5Z"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                      <path
+                        d="M10 15V25M30 15V25"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                      <path
+                        d="M4 12V28L20 35L36 28V12"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                    </svg>
+                  </div>
+                  <span>Penn</span>
+                </div>
               </div>
             </div>
             <div class="partners-divider"></div>
