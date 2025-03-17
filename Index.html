@@ -253,80 +253,51 @@
 
       /* Enhanced Hero Section */
       .hero {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        align-items: center;
-        gap: 60px;
         min-height: 100vh;
         padding: 120px 0 80px;
+        display: flex;
+        align-items: center;
+      }
+
+      .hero-split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        width: 100%;
+        align-items: start;
         position: relative;
+        z-index: 1;
       }
 
-      .hero-content {
-        max-width: 560px;
-        opacity: 0;
-        transform: translateY(20px);
-        animation: fadeInUp 0.8s ease forwards;
-      }
-
-      @keyframes fadeInUp {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .hero-subtitle {
-        font-size: 16px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        color: var(--secondary);
-        margin-bottom: 16px;
-        display: inline-block;
-        padding: 8px 16px;
-        background: rgba(74, 144, 226, 0.1);
-        border-radius: 100px;
+      .hero-form-section {
+        max-width: 500px;
+        position: sticky;
+        top: 120px;
       }
 
       .hero-title {
-        font-size: 64px;
+        font-size: 48px;
         font-weight: 800;
-        line-height: 1.1;
-        margin-bottom: 24px;
+        margin-bottom: 16px;
         background: var(--gradient-2);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        position: relative;
       }
 
-      .hero-title::after {
-        content: "";
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        width: 100px;
-        height: 4px;
-        background: var(--gradient-1);
-        border-radius: 2px;
-      }
-
-      .hero-description {
-        font-size: 18px;
-        line-height: 1.6;
+      .hero-subtitle {
+        font-size: 20px;
         color: var(--text-secondary);
         margin-bottom: 32px;
       }
 
       .hero-form {
         display: flex;
-        gap: 12px;
-        margin-bottom: 24px;
-        position: relative;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 16px;
       }
 
-      .hero-input {
-        flex: 1;
+      .form-input {
         padding: 16px 20px;
         border-radius: 8px;
         border: 1px solid rgba(255, 255, 255, 0.1);
@@ -336,164 +307,506 @@
         transition: all 0.3s ease;
       }
 
-      .hero-input:focus {
+      .form-input:focus {
         outline: none;
         border-color: var(--secondary);
         background: rgba(255, 255, 255, 0.1);
         box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
       }
 
-      .hero-input::placeholder {
-        color: rgba(255, 255, 255, 0.4);
+      .btn-large {
+        padding: 16px 32px;
+        font-size: 18px;
+        width: 100%;
       }
 
-      .hero-note {
+      .form-note {
         font-size: 14px;
-        color: rgba(255, 255, 255, 0.5);
+        color: var(--text-secondary);
+        margin-bottom: 16px;
       }
 
-      .hero-visual {
+      .text-link {
+        color: var(--secondary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .text-link:hover {
+        color: var(--primary);
+      }
+
+      /* Enhanced Hero Cases Section */
+      .hero-cases {
         position: relative;
         height: 100%;
-        min-height: 500px;
-        perspective: 1000px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px; /* Reduced from 48px to 24px for better alignment */
+        padding: 20px;
+        max-width: 600px;
+        margin-left: auto;
       }
 
-      .hero-card {
-        position: absolute;
-        background: var(--card-bg);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 24px;
-        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-        transition: all 0.4s ease;
+      .case-study {
+        position: relative;
+        background: linear-gradient(
+          135deg,
+          rgba(49, 132, 255, 0.1),
+          rgba(74, 144, 226, 0.05)
+        );
+        border-radius: 24px;
+        padding: 28px;
         transform-style: preserve-3d;
+        perspective: 1000px;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        margin-bottom: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
       }
 
-      .hero-card:hover {
-        transform: translateY(-8px) rotateX(5deg);
-        box-shadow: 0 40px 70px rgba(0, 0, 0, 0.4);
+      .case-study-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 16px; /* Reduced from 20px to 16px */
       }
 
-      .hero-card.card-1 {
+      .milestone-path {
+        position: relative;
+        margin: 20px 0; /* Reduced from 24px to 20px */
+        padding-left: 24px;
+      }
+
+      .milestone {
+        position: relative;
+        padding-left: 20px;
+        margin-bottom: 12px; /* Reduced from 16px to 12px */
+        opacity: 0.7;
+        transition: all 0.3s ease;
+        transform: translateZ(0);
+      }
+
+      .milestone::before {
+        content: "";
+        position: absolute;
+        left: -2px;
+        top: 50%;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--primary);
+        transform: translateY(-50%);
+      }
+
+      .milestone::after {
+        content: "";
+        position: absolute;
+        left: 2px;
+        top: 50%;
+        width: 2px;
+        height: calc(100% + 16px);
+        background: var(--primary);
+        opacity: 0.3;
+        transform: translateY(-50%);
+      }
+
+      .milestone:hover {
+        opacity: 1;
+        transform: translateX(5px) translateZ(20px);
+      }
+
+      /* Connection Lines Animation */
+      .connection-lines {
+        position: absolute;
         top: 0;
         left: 0;
-        width: 280px;
-        animation: floatCard1 6s ease-in-out infinite;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
       }
 
-      .hero-card.card-2 {
-        top: 140px;
-        right: 0;
-        width: 320px;
-        z-index: 2;
-        animation: floatCard2 6s ease-in-out infinite;
+      .connection-line {
+        position: absolute;
+        background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
+        height: 2px;
+        opacity: 0.3;
+        animation: pulseLine 2s infinite;
       }
 
-      .hero-card.card-3 {
-        bottom: 0;
-        left: 60px;
-        width: 300px;
-        animation: floatCard3 6s ease-in-out infinite;
-      }
-
-      @keyframes floatCard1 {
+      @keyframes pulseLine {
         0%,
         100% {
-          transform: translateY(0);
+          opacity: 0.3;
         }
         50% {
-          transform: translateY(-20px);
+          opacity: 0.6;
         }
       }
 
-      @keyframes floatCard2 {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-15px);
-        }
+      /* Floating Stats Animation */
+      .floating-stat {
+        position: absolute;
+        background: rgba(10, 23, 42, 0.9);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 12px 20px;
+        font-size: 14px;
+        color: var(--text);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        transform-style: preserve-3d;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1;
       }
 
-      @keyframes floatCard3 {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-25px);
-        }
+      .floating-stat:nth-child(1) {
+        top: -15px;
+        right: -15px;
+        animation-delay: 0s;
       }
 
-      /* Enhanced Partners Section */
-      .partners {
-        padding: 80px 0;
-        background: rgba(255, 255, 255, 0.02);
+      .floating-stat:nth-child(2) {
+        bottom: -15px;
+        left: -15px;
+        animation-delay: 1s;
+      }
+
+      .feature-block {
+        position: relative;
+        background: linear-gradient(
+          135deg,
+          rgba(49, 132, 255, 0.1),
+          rgba(74, 144, 226, 0.05)
+        );
+        border-radius: 24px;
+        padding: 28px;
+        transform-style: preserve-3d;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        margin: 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .feature-block:hover,
+      .case-study:hover {
+        transform: translateY(-10px) scale(1.02);
+        background: linear-gradient(
+          135deg,
+          rgba(49, 132, 255, 0.15),
+          rgba(74, 144, 226, 0.1)
+        );
+        border-color: rgba(74, 144, 226, 0.3);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .feature-block h3 {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: var(--text);
+      }
+
+      .feature-block p {
+        font-size: 15px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 16px;
+      }
+
+      .success-story {
         position: relative;
         overflow: hidden;
+        padding: 32px; /* Reduced padding */
+        background: linear-gradient(
+          135deg,
+          rgba(74, 222, 128, 0.1),
+          rgba(74, 144, 226, 0.05)
+        );
+        border-radius: 24px;
+        margin: 20px 30px; /* Added margin for consistency */
       }
 
-      .partners::before {
+      .success-story::before {
         content: "";
         position: absolute;
         top: 0;
         left: 0;
-        right: 0;
-        height: 1px;
+        width: 100%;
+        height: 100%;
         background: linear-gradient(
-          90deg,
+          45deg,
           transparent,
           rgba(255, 255, 255, 0.1),
           transparent
         );
+        animation: shimmer 2s infinite;
       }
 
-      .section-title {
-        text-align: center;
+      @keyframes shimmer {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      .case-card h3 {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .case-card.highlight {
+        background: linear-gradient(
+          135deg,
+          rgba(49, 132, 255, 0.1),
+          rgba(74, 144, 226, 0.1)
+        );
+        border-color: var(--primary);
+      }
+
+      .case-card.success-story {
+        background: linear-gradient(
+          135deg,
+          rgba(74, 222, 128, 0.1),
+          rgba(74, 144, 226, 0.1)
+        );
+        border-color: #4ade80;
+      }
+
+      .case-card:hover {
+        transform: translateY(-8px) scale(1.02) !important;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        border-color: var(--primary);
+      }
+
+      .case-list {
+        list-style: none;
+        margin: 16px 0;
+        color: var(--text-secondary);
+        font-size: 16px;
+      }
+
+      .case-list li {
+        margin-bottom: 12px;
+        transition: all 0.3s ease;
+        padding-left: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .case-list li:hover {
+        color: var(--text);
+        transform: translateX(8px);
+      }
+
+      .success-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        background: linear-gradient(
+          135deg,
+          rgba(74, 222, 128, 0.1),
+          rgba(74, 144, 226, 0.1)
+        );
+        border-radius: 100px;
         font-size: 14px;
         font-weight: 600;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
+        color: #4ade80;
+        margin-top: 16px;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotateX(0);
+        }
+        50% {
+          transform: translateY(-10px) rotateX(2deg);
+        }
+      }
+
+      .case-card {
+        animation: none;
+        animation-play-state: running;
+      }
+
+      .case-card:nth-child(1) {
+        --delay: 0;
+      }
+      .case-card:nth-child(2) {
+        --delay: 1;
+      }
+      .case-card:nth-child(3) {
+        --delay: 2;
+      }
+      .case-card:nth-child(4) {
+        --delay: 3;
+      }
+
+      .case-card.highlight:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(49, 132, 255, 0.15),
+          rgba(74, 144, 226, 0.15)
+        );
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      }
+
+      .case-card.highlight {
+        background: linear-gradient(
+          135deg,
+          rgba(49, 132, 255, 0.1),
+          rgba(74, 144, 226, 0.1)
+        );
+        border-color: var(--primary);
+      }
+
+      .case-card.success-story {
+        background: linear-gradient(
+          135deg,
+          rgba(74, 222, 128, 0.1),
+          rgba(74, 144, 226, 0.1)
+        );
+        border-color: #4ade80;
+      }
+
+      .case-card:hover {
+        transform: translateY(-8px) scale(1.02) !important;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        border-color: var(--primary);
+      }
+
+      .case-list {
+        list-style: none;
+        margin: 16px 0;
         color: var(--text-secondary);
-        margin-bottom: 40px;
-        position: relative;
+        font-size: 16px;
       }
 
-      .section-title::after {
-        content: "";
-        position: absolute;
-        bottom: -10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 40px;
-        height: 2px;
-        background: var(--gradient-1);
-        border-radius: 1px;
-      }
-
-      .partners-grid {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 80px;
-        flex-wrap: wrap;
-        position: relative;
-      }
-
-      .partner-logo {
-        opacity: 0.6;
-        height: 32px;
+      .case-list li {
+        margin-bottom: 12px;
         transition: all 0.3s ease;
-        filter: grayscale(100%);
+        padding-left: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
       }
 
-      .partner-logo:hover {
-        opacity: 1;
-        filter: grayscale(0%);
-        transform: scale(1.1);
+      .case-list li:hover {
+        color: var(--text);
+        transform: translateX(8px);
+      }
+
+      .success-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        background: linear-gradient(
+          135deg,
+          rgba(74, 222, 128, 0.1),
+          rgba(74, 144, 226, 0.1)
+        );
+        border-radius: 100px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #4ade80;
+        margin-top: 16px;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotateX(0);
+        }
+        50% {
+          transform: translateY(-10px) rotateX(2deg);
+        }
+      }
+
+      .case-card {
+        animation: none;
+        animation-play-state: running;
+      }
+
+      .case-card:nth-child(1) {
+        --delay: 0;
+      }
+      .case-card:nth-child(2) {
+        --delay: 1;
+      }
+      .case-card:nth-child(3) {
+        --delay: 2;
+      }
+      .case-card:nth-child(4) {
+        --delay: 3;
+      }
+
+      @media (max-width: 1024px) {
+        .hero-split {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .hero-form-section {
+          position: relative;
+          top: 0;
+        }
+
+        .hero-cases {
+          max-height: none;
+          overflow-y: visible;
+          padding-right: 0;
+        }
+      }
+
+      /* Enhanced Animations */
+      .case-card {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.6s ease forwards;
+        animation-play-state: paused;
+      }
+
+      .case-card.in-view {
+        animation-play-state: running;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Scroll-triggered animations */
+      .case-card {
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+      }
+
+      .case-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        border-color: var(--primary);
+      }
+
+      /* Add smooth scroll behavior */
+      html {
+        scroll-behavior: smooth;
       }
 
       /* Enhanced Features Section */
@@ -592,14 +905,14 @@
       .feature-card h3 {
         font-size: 22px;
         font-weight: 700;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
       }
 
       .feature-card p {
         font-size: 16px;
+        line-height: 1.5;
         color: var(--text-secondary);
-        line-height: 1.6;
-        margin-bottom: 24px;
+        margin-bottom: 20px;
       }
 
       .feature-list {
@@ -1726,6 +2039,184 @@
       .loading-spinner {
         animation: spin 1s linear infinite, pulse 2s ease-in-out infinite;
       }
+
+      /* Add these new styles */
+      .case-list {
+        list-style: none;
+        margin: 12px 0;
+        color: var(--text-secondary);
+        font-size: 15px;
+      }
+
+      .case-list li {
+        margin-bottom: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .case-list li:hover {
+        color: var(--text);
+        transform: translateX(5px);
+      }
+
+      .success-tag {
+        display: inline-block;
+        padding: 4px 12px;
+        background: linear-gradient(
+          135deg,
+          rgba(49, 132, 255, 0.1),
+          rgba(74, 144, 226, 0.2)
+        );
+        border-radius: 100px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--primary);
+        margin-top: 12px;
+      }
+
+      .case-card.highlight {
+        background: linear-gradient(
+          135deg,
+          rgba(49, 132, 255, 0.1),
+          rgba(74, 144, 226, 0.1)
+        );
+        border-color: var(--primary);
+      }
+
+      .case-card.highlight:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(49, 132, 255, 0.15),
+          rgba(74, 144, 226, 0.15)
+        );
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      }
+
+      .partners {
+        padding: 60px 0;
+        background: rgba(255, 255, 255, 0.02);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .partners-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 60px;
+      }
+
+      .partners-column {
+        flex: 1;
+      }
+
+      .partners-divider {
+        width: 1px;
+        height: 120px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+        margin: 40px 0;
+      }
+
+      .section-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 32px;
+        text-align: center;
+        color: var(--text);
+      }
+
+      .partners-grid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+        flex-wrap: wrap;
+      }
+
+      .partner-logo {
+        height: 40px;
+        width: auto;
+        opacity: 0.7;
+        transition: all 0.3s ease;
+      }
+
+      .partner-logo:hover {
+        opacity: 1;
+        transform: translateY(-2px);
+      }
+
+      .builders-grid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+      }
+
+      .builder-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .builder-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: linear-gradient(
+          135deg,
+          rgba(49, 132, 255, 0.1),
+          rgba(74, 144, 226, 0.05)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        transition: all 0.3s ease;
+      }
+
+      .builder-item:hover .builder-icon {
+        transform: translateY(-5px);
+        background: linear-gradient(
+          135deg,
+          rgba(49, 132, 255, 0.2),
+          rgba(74, 144, 226, 0.1)
+        );
+        color: var(--text);
+      }
+
+      .builder-item span {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-secondary);
+      }
+
+      .builder-item:hover span {
+        color: var(--text);
+      }
+
+      @media (max-width: 768px) {
+        .partners-row {
+          flex-direction: column;
+          gap: 40px;
+        }
+
+        .partners-divider {
+          width: 100%;
+          height: 1px;
+          margin: 20px 0;
+        }
+
+        .builders-grid {
+          flex-wrap: wrap;
+          gap: 24px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1804,89 +2295,205 @@
 
       <!-- Hero Section -->
       <section class="hero container" id="hero">
-        <div class="hero-content" data-aos="fade-up" data-aos-delay="100">
-          <span class="hero-subtitle">Elite Admissions Made Simple</span>
-          <h1 class="hero-title">Get into Your Dream College with Ultra</h1>
-          <p class="hero-description">
-            Like a $20k/year admissions consultant, but
-            <strong>better</strong> and <strong>free</strong>. Ultra connects
-            you with real CEOs, secret YC opportunities, and a 24/7 consultant
-            that's always on your side.
-          </p>
-          <form class="hero-form">
-            <input
-              type="email"
-              class="hero-input"
-              placeholder="Enter your email to get started"
-              required
-            />
-            <button class="btn btn-primary" type="submit">Start Now</button>
-          </form>
-          <p class="hero-note">No spam. No fees. Just real results.</p>
-        </div>
-        <div class="hero-visual">
+        <div class="hero-split">
           <div
-            class="hero-card card-1"
+            class="hero-form-section"
             data-aos="fade-right"
-            data-aos-delay="200"
+            data-aos-delay="100"
           >
-            <div class="card-icon">🔑</div>
-            <span class="card-label">Pro Access</span>
-            <h4 class="card-title">Secret YC Jobs</h4>
-            <p class="card-content">
-              We unlock 3,000+ exclusive extracurriculars and hidden startup
-              roles.
+            <h1 class="hero-title">Your Elite College Admissions Coach</h1>
+            <p class="hero-subtitle">
+              Like having a $20k/year admissions consultant, but better and
+              completely free
             </p>
+            <form class="hero-form" data-aos="fade-up" data-aos-delay="200">
+              <input
+                type="email"
+                class="form-input"
+                placeholder="Enter your email"
+                required
+              />
+              <input
+                type="tel"
+                class="form-input"
+                placeholder="Enter your phone number"
+                required
+              />
+              <button class="btn btn-primary btn-large" type="submit">
+                Get Your Free Strategy Call
+              </button>
+            </form>
+            <p class="form-note" data-aos="fade-up" data-aos-delay="300">
+              Get connected with an advisor within 15 seconds • Quick 15-minute
+              strategy session • Receive personalized opportunities instantly
+            </p>
+            <a
+              href="#"
+              class="text-link"
+              data-aos="fade-up"
+              data-aos-delay="400"
+              >Or sign up without a call →</a
+            >
           </div>
-          <div class="hero-card card-2" data-aos="fade-up" data-aos-delay="400">
-            <div class="card-icon">🎓</div>
-            <span class="card-label">Simulated Admissions</span>
-            <h4 class="card-title">See Where You Stand</h4>
-            <p class="card-content">
-              Get real-time feedback from AI &amp; top admissions pros.
-            </p>
-          </div>
-          <div
-            class="hero-card card-3"
-            data-aos="fade-left"
-            data-aos-delay="600"
-          >
-            <div class="card-icon">⚡</div>
-            <span class="card-label">24/7 Consultant</span>
-            <h4 class="card-title">Always On-Call</h4>
-            <p class="card-content">
-              Never stress alone. Ultra is by your side for pep talks &amp;
-              strategy.
-            </p>
+
+          <div class="hero-cases">
+            <div class="case-study" data-aos="fade-up">
+              <div class="case-study-header">
+                <h3>🎯 Anthony's Journey to Stanford</h3>
+              </div>
+
+              <div class="milestone-path">
+                <div class="milestone">Initial Profile Analysis</div>
+                <div class="milestone">AI Match with Research Program</div>
+                <div class="milestone">Summer Internship Success</div>
+                <div class="milestone">Stanford Acceptance</div>
+              </div>
+            </div>
+
+            <div class="feature-block" data-aos="fade-up">
+              <h3>⭐ Exclusive Opportunity Network</h3>
+              <p>
+                Access our curated database of elite opportunities and
+                connections
+              </p>
+              <ul class="case-list">
+                <li>🎓 Premium summer programs at top universities</li>
+                <li>🚀 Special positions at YC startups</li>
+                <li>🤝 Direct connections with investors</li>
+                <li>🏆 Merit-based scholarships</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="partners">
         <div class="container">
-          <h2 class="section-title">Trusted by students admitted to</h2>
-          <div class="partners-grid">
-            <img
-              src="/api/placeholder/120/40"
-              alt="Harvard University"
-              class="partner-logo"
-            />
-            <img
-              src="/api/placeholder/120/40"
-              alt="Stanford University"
-              class="partner-logo"
-            />
-            <img src="/api/placeholder/120/40" alt="MIT" class="partner-logo" />
-            <img
-              src="/api/placeholder/120/40"
-              alt="Yale University"
-              class="partner-logo"
-            />
-            <img
-              src="/api/placeholder/120/40"
-              alt="Princeton University"
-              class="partner-logo"
-            />
+          <div class="partners-row">
+            <div class="partners-column">
+              <h2 class="section-title">Trusted by students admitted to</h2>
+              <div class="partners-grid">
+                <img
+                  src="https://via.placeholder.com/120x40"
+                  alt="Harvard University"
+                  class="partner-logo"
+                />
+                <img
+                  src="https://via.placeholder.com/120x40"
+                  alt="Stanford University"
+                  class="partner-logo"
+                />
+                <img
+                  src="https://via.placeholder.com/120x40"
+                  alt="MIT"
+                  class="partner-logo"
+                />
+                <img
+                  src="https://via.placeholder.com/120x40"
+                  alt="Yale University"
+                  class="partner-logo"
+                />
+                <img
+                  src="https://via.placeholder.com/120x40"
+                  alt="Princeton University"
+                  class="partner-logo"
+                />
+              </div>
+            </div>
+            <div class="partners-divider"></div>
+            <div class="partners-column">
+              <h2 class="section-title">Built by alums from</h2>
+              <div class="builders-grid">
+                <div class="builder-item">
+                  <div class="builder-icon">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 2L2 7L12 12L22 7L12 2Z"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M2 17L12 22L22 17"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M2 12L12 17L22 12"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <span>Y Combinator</span>
+                </div>
+                <div class="builder-item">
+                  <div class="builder-icon">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 2L2 7L12 12L22 7L12 2Z"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M2 17L12 22L22 17"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <span>Google</span>
+                </div>
+                <div class="builder-item">
+                  <div class="builder-icon">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M21 16V8C21 7.46957 20.7893 6.96086 20.4142 6.58579C20.0391 6.21071 19.5304 6 19 6H5C4.46957 6 3.96086 6.21071 3.58579 6.58579C3.21071 6.96086 3 7.46957 3 8V16C3 16.5304 3.21071 17.0391 3.58579 17.4142C3.96086 17.7893 4.46957 18 5 18H19C19.5304 18 20.0391 17.7893 20.4142 17.4142C20.7893 17.0391 21 16.5304 21 16Z"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <span>OpenAI</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -2166,7 +2773,7 @@
           <div class="simulation-visual" data-aos="fade-left">
             <div class="simulation-screen">
               <img
-                src="/api/placeholder/500/500"
+                src="https://via.placeholder.com/500x500"
                 alt="Ultra simulation screen"
                 style="
                   width: 100%;
@@ -2615,132 +3222,43 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-      // Initialize AOS with enhanced settings
-      AOS.init({
-        duration: 800,
-        once: false,
-        offset: 100,
-        mirror: true,
-        easing: "ease-out-cubic",
-      });
-
-      // Loading Screen
-      window.addEventListener("load", () => {
-        document.querySelector(".loading").classList.add("hidden");
-      });
-
-      // Enhanced Scroll Progress Bar with smooth animation
-      window.addEventListener("scroll", () => {
-        const scrollProgress = document.querySelector(".scroll-progress");
-        const scrollPercent =
-          (window.scrollY /
-            (document.documentElement.scrollHeight - window.innerHeight)) *
-          100;
-        requestAnimationFrame(() => {
-          scrollProgress.style.transform = `scaleX(${scrollPercent / 100})`;
-        });
-      });
-
-      // Enhanced Parallax Effect
-      window.addEventListener("scroll", () => {
-        requestAnimationFrame(() => {
-          const scrolled = window.scrollY;
-          const heroVisual = document.querySelector(".hero-visual");
-          const cards = document.querySelectorAll(".hero-card");
-
-          heroVisual.style.transform = `translateY(${scrolled * 0.1}px)`;
-
-          cards.forEach((card, index) => {
-            const speed = 0.05 + index * 0.02;
-            const rotation = scrolled * 0.02;
-            card.style.transform = `translateY(${
-              scrolled * speed
-            }px) rotateX(${rotation}deg)`;
-          });
-
-          // Parallax for other sections
-          document
-            .querySelectorAll(
-              ".feature-card, .testimonial-card, .opportunity-card"
-            )
-            .forEach((el, i) => {
-              const rect = el.getBoundingClientRect();
-              const isInView = rect.top < window.innerHeight && rect.bottom > 0;
-
-              if (isInView) {
-                const distance = window.innerHeight - rect.top;
-                const parallaxSpeed = 0.05;
-                el.style.transform = `translateY(${
-                  distance * parallaxSpeed
-                }px)`;
-              }
-            });
-        });
-      });
-
-      // Enhanced hover effects
-      document
-        .querySelectorAll(".feature-card, .testimonial-card, .opportunity-card")
-        .forEach((card) => {
-          card.addEventListener("mousemove", (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateX = (y - centerY) / 20;
-            const rotateY = (centerX - x) / 20;
-
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-          });
-
-          card.addEventListener("mouseleave", () => {
-            card.style.transform =
-              "perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)";
-          });
+      // Initialize AOS with simpler settings first
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize AOS with basic settings
+        AOS.init({
+          duration: 800,
+          once: true,
+          offset: 100,
         });
 
-      // Add smooth transitions to all animated elements
-      document
-        .querySelectorAll(
-          ".feature-card, .testimonial-card, .opportunity-card, .hero-card"
-        )
-        .forEach((el) => {
-          el.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)";
-        });
+        // Handle loading screen
+        const loadingScreen = document.querySelector(".loading");
+        if (loadingScreen) {
+          setTimeout(() => {
+            loadingScreen.classList.add("hidden");
+            setTimeout(() => (loadingScreen.style.display = "none"), 500);
+          }, 1000);
+        }
 
-      // Intersection Observer for enhanced animations
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px",
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-            entry.target.style.transform = "translateY(0) scale(1)";
-            entry.target.style.opacity = "1";
-          } else {
-            entry.target.classList.remove("in-view");
-            entry.target.style.transform = "translateY(20px) scale(0.95)";
-            entry.target.style.opacity = "0.5";
+        // Basic scroll handling
+        window.addEventListener("scroll", function () {
+          const header = document.querySelector("header");
+          if (header) {
+            if (window.scrollY > 50) {
+              header.classList.add("scrolled");
+            } else {
+              header.classList.remove("scrolled");
+            }
           }
         });
-      }, observerOptions);
 
-      const animatedElements = document.querySelectorAll(
-        ".feature-card, .testimonial-card, .opportunity-card, .hero-card, .simulation-content, .simulation-visual"
-      );
-
-      animatedElements.forEach((el) => {
-        el.style.transition = "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
-        observer.observe(el);
+        // Handle image errors
+        document.querySelectorAll("img").forEach((img) => {
+          img.onerror = function () {
+            this.style.display = "none";
+          };
+        });
       });
-
-      // Rest of the existing JavaScript...
     </script>
   </body>
 </html>
