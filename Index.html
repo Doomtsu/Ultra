@@ -340,80 +340,230 @@
       /* Enhanced Hero Cases Section */
       .hero-cases {
         position: relative;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 24px; /* Reduced from 48px to 24px for better alignment */
-        padding: 20px;
-        max-width: 600px;
-        margin-left: auto;
+        height: 600px;
+        overflow: hidden;
       }
 
-      .case-study {
+      .story-cards-container {
         position: relative;
+        height: 100%;
+        overflow-y: auto;
+        scroll-snap-type: y mandatory;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+      }
+
+      .story-cards-container::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+      }
+
+      .story-card {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
         background: linear-gradient(
           135deg,
           rgba(49, 132, 255, 0.1),
           rgba(74, 144, 226, 0.05)
         );
-        border-radius: 24px;
-        padding: 28px;
-        transform-style: preserve-3d;
-        perspective: 1000px;
-        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        margin-bottom: 24px;
         border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 32px;
+        opacity: 0.3;
+        transition: all 0.5s ease;
       }
 
-      .case-study-header {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        margin-bottom: 16px; /* Reduced from 20px to 16px */
+      .story-card.active {
+        opacity: 1;
       }
 
-      .milestone-path {
-        position: relative;
-        margin: 20px 0; /* Reduced from 24px to 20px */
-        padding-left: 24px;
-      }
-
-      .milestone {
-        position: relative;
-        padding-left: 20px;
-        margin-bottom: 12px; /* Reduced from 16px to 12px */
-        opacity: 0.7;
-        transition: all 0.3s ease;
-        transform: translateZ(0);
-      }
-
-      .milestone::before {
-        content: "";
+      .story-tabs {
         position: absolute;
-        left: -2px;
-        top: 50%;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 12px;
+        z-index: 10;
+      }
+
+      .tab {
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background: var(--primary);
-        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        transition: all 0.3s ease;
       }
 
-      .milestone::after {
+      .tab.active {
+        width: 24px;
+        border-radius: 12px;
+        background: var(--primary);
+      }
+
+      .feature-block {
+        margin-top: 24px;
+        background: linear-gradient(
+          135deg,
+          rgba(49, 132, 255, 0.1),
+          rgba(74, 144, 226, 0.05)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 28px;
+        transition: all 0.3s ease;
+      }
+
+      .case-list {
+        list-style: none;
+        margin: 16px 0;
+        color: var(--text-secondary);
+        font-size: 15px;
+      }
+
+      .case-list li {
+        margin-bottom: 12px;
+        transition: all 0.3s ease;
+        padding-left: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .case-list li:hover {
+        color: var(--text);
+        transform: translateX(8px);
+      }
+
+      .profile-section {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .profile-photo {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .profile-info h4 {
+        font-size: 20px;
+        margin: 0;
+        color: var(--text);
+      }
+
+      .profile-info p {
+        font-size: 16px;
+        color: var(--text-secondary);
+        margin: 4px 0 0 0;
+      }
+
+      .story-highlight {
+        font-size: 24px;
+        line-height: 1.4;
+        color: var(--text);
+        margin: 24px 0;
+        font-weight: 500;
+      }
+
+      .company-section {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        margin: 32px 0;
+        position: relative;
+      }
+
+      .company-logo,
+      .ceo-photo {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        object-fit: cover;
+      }
+
+      .connector-line {
+        flex: 1;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        position: relative;
+      }
+
+      .connector-line::after {
         content: "";
         position: absolute;
-        left: 2px;
+        right: -4px;
         top: 50%;
-        width: 2px;
-        height: calc(100% + 16px);
-        background: var(--primary);
-        opacity: 0.3;
         transform: translateY(-50%);
+        width: 8px;
+        height: 8px;
+        background: var(--secondary);
+        border-radius: 50%;
       }
 
-      .milestone:hover {
+      .pathway-timeline {
+        margin-top: 40px;
+      }
+
+      .pathway-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+        opacity: 0.6;
+        transition: all 0.3s ease;
+      }
+
+      .pathway-item:hover {
         opacity: 1;
-        transform: translateX(5px) translateZ(20px);
+        transform: translateX(10px);
+      }
+
+      .pathway-dot {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .pathway-dot.highlight {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+      }
+
+      .highlight-text {
+        font-size: 20px;
+        color: var(--primary);
+        margin: 16px 0;
+      }
+
+      .connection-detail {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .tag {
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 100px;
+        font-size: 14px;
+        color: var(--text);
+      }
+
+      .arrow {
+        color: var(--primary);
+        font-size: 20px;
       }
 
       /* Connection Lines Animation */
@@ -2217,64 +2367,6 @@
           gap: 24px;
         }
       }
-
-      /* Add these new styles in the CSS section */
-      .partner-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        transition: all 0.3s ease;
-      }
-
-      .partner-item:hover {
-        transform: translateY(-5px);
-      }
-
-      .partner-icon {
-        width: 60px;
-        height: 60px;
-        border-radius: 12px;
-        background: linear-gradient(
-          135deg,
-          rgba(49, 132, 255, 0.1),
-          rgba(74, 144, 226, 0.05)
-        );
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--primary);
-        transition: all 0.3s ease;
-      }
-
-      .partner-item:hover .partner-icon {
-        background: linear-gradient(
-          135deg,
-          rgba(49, 132, 255, 0.2),
-          rgba(74, 144, 226, 0.1)
-        );
-        transform: scale(1.1);
-      }
-
-      .partner-item span {
-        font-size: 14px;
-        font-weight: 600;
-        color: var(--text-secondary);
-        transition: color 0.3s ease;
-      }
-
-      .partner-item:hover span {
-        color: var(--text);
-      }
-
-      .partners-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        gap: 24px;
-        justify-items: center;
-        align-items: center;
-        margin-top: 24px;
-      }
     </style>
   </head>
   <body>
@@ -2395,33 +2487,278 @@
           </div>
 
           <div class="hero-cases">
-            <div class="case-study" data-aos="fade-up">
-              <div class="case-study-header">
-                <h3>🎯 Anthony's Journey to Stanford</h3>
+            <div class="story-cards-container">
+              <!-- Story Cards - Stacked with smooth scroll transitions -->
+              <div class="story-card" id="card-intro" data-index="0">
+                <div class="story-header">
+                  <h3>🎯 Anthony's Journey</h3>
+                  <div class="profile-section">
+                    <img
+                      src="https://placehold.co/100x100"
+                      alt="Anthony's Photo"
+                      class="profile-photo"
+                    />
+                    <div class="profile-info">
+                      <h4>Anthony Chen</h4>
+                      <p>Stanford '27</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="story-content">
+                  <p class="story-highlight">
+                    "Ultra helped me navigate from high school to Stanford,
+                    connecting me with opportunities I never knew existed."
+                  </p>
+                </div>
               </div>
 
-              <div class="milestone-path">
-                <div class="milestone">Initial Profile Analysis</div>
-                <div class="milestone">AI Match with Research Program</div>
-                <div class="milestone">Summer Internship Success</div>
-                <div class="milestone">Stanford Acceptance</div>
+              <div class="story-card" id="card-connection" data-index="1">
+                <div class="story-header">
+                  <h3>🤝 The Magic Hour Connection</h3>
+                  <div class="company-section">
+                    <img
+                      src="https://placehold.co/60x60"
+                      alt="Magic Hour Logo"
+                      class="company-logo"
+                    />
+                    <div class="connector-line"></div>
+                    <img
+                      src="https://placehold.co/60x60"
+                      alt="Runbo Li Photo"
+                      class="ceo-photo"
+                    />
+                  </div>
+                </div>
+                <div class="story-content">
+                  <p>Connected with Runbo Li, CEO of Magic Hour</p>
+                  <p class="highlight-text">
+                    First tech internship opportunity
+                  </p>
+                  <div class="connection-detail">
+                    <span class="tag">Ultra Network</span>
+                    <span class="arrow">→</span>
+                    <span class="tag">Direct Mentorship</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="story-card" id="card-pathway" data-index="2">
+                <div class="pathway-timeline">
+                  <div class="pathway-item">
+                    <div class="pathway-dot"></div>
+                    <p>Initial Profile Analysis</p>
+                  </div>
+                  <div class="pathway-item">
+                    <div class="pathway-dot"></div>
+                    <p>Magic Hour Internship</p>
+                  </div>
+                  <div class="pathway-item">
+                    <div class="pathway-dot"></div>
+                    <p>Stanford Application</p>
+                  </div>
+                  <div class="pathway-item">
+                    <div class="pathway-dot highlight">
+                      <span>🎉</span>
+                    </div>
+                    <p>Stanford Acceptance</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="story-card" id="card-opportunities" data-index="3">
+                <div class="feature-block">
+                  <h3>⭐ Exclusive Opportunity Network</h3>
+                  <p>
+                    Access our curated database of elite opportunities and
+                    connections
+                  </p>
+                  <ul class="case-list">
+                    <li>🎓 Premium summer programs at top universities</li>
+                    <li>🚀 Special positions at YC startups</li>
+                    <li>🤝 Direct connections with investors</li>
+                    <li>🏆 Merit-based scholarships</li>
+                  </ul>
+                </div>
               </div>
             </div>
 
-            <div class="feature-block" data-aos="fade-up">
-              <h3>⭐ Exclusive Opportunity Network</h3>
-              <p>
-                Access our curated database of elite opportunities and
-                connections
-              </p>
-              <ul class="case-list">
-                <li>🎓 Premium summer programs at top universities</li>
-                <li>🚀 Special positions at YC startups</li>
-                <li>🤝 Direct connections with investors</li>
-                <li>🏆 Merit-based scholarships</li>
-              </ul>
+            <!-- Tab indicators -->
+            <div class="story-tabs">
+              <div class="tab active" data-index="0"></div>
+              <div class="tab" data-index="1"></div>
+              <div class="tab" data-index="2"></div>
+              <div class="tab" data-index="3"></div>
             </div>
           </div>
+
+          <style>
+            .hero-cases {
+              position: relative;
+              height: 600px;
+              overflow: hidden;
+            }
+
+            .story-cards-container {
+              position: relative;
+              height: 100%;
+              overflow-y: auto;
+              scroll-snap-type: y mandatory;
+              scrollbar-width: none; /* Firefox */
+              -ms-overflow-style: none; /* IE and Edge */
+            }
+
+            .story-cards-container::-webkit-scrollbar {
+              display: none; /* Chrome, Safari, Opera */
+            }
+
+            .story-card {
+              position: relative;
+              height: 100%;
+              width: 100%;
+              scroll-snap-align: start;
+              scroll-snap-stop: always;
+              background: linear-gradient(
+                135deg,
+                rgba(49, 132, 255, 0.1),
+                rgba(74, 144, 226, 0.05)
+              );
+              border: 1px solid rgba(255, 255, 255, 0.1);
+              border-radius: 24px;
+              padding: 32px;
+              opacity: 0.3;
+              transition: all 0.5s ease;
+            }
+
+            .story-card.active {
+              opacity: 1;
+            }
+
+            .story-tabs {
+              position: absolute;
+              bottom: 24px;
+              left: 50%;
+              transform: translateX(-50%);
+              display: flex;
+              gap: 12px;
+              z-index: 10;
+            }
+
+            .tab {
+              width: 8px;
+              height: 8px;
+              border-radius: 50%;
+              background: rgba(255, 255, 255, 0.3);
+              cursor: pointer;
+              transition: all 0.3s ease;
+            }
+
+            .tab.active {
+              width: 24px;
+              border-radius: 12px;
+              background: var(--primary);
+            }
+
+            /* Keep existing card content styles */
+            .feature-block {
+              margin-top: 24px;
+              background: linear-gradient(
+                135deg,
+                rgba(49, 132, 255, 0.1),
+                rgba(74, 144, 226, 0.05)
+              );
+              border: 1px solid rgba(255, 255, 255, 0.1);
+              border-radius: 24px;
+              padding: 28px;
+              transition: all 0.3s ease;
+            }
+
+            .case-list {
+              list-style: none;
+              margin: 16px 0;
+              color: var(--text-secondary);
+              font-size: 15px;
+            }
+
+            .case-list li {
+              margin-bottom: 12px;
+              transition: all 0.3s ease;
+              padding-left: 8px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+
+            .case-list li:hover {
+              color: var(--text);
+              transform: translateX(8px);
+            }
+          </style>
+
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              const container = document.querySelector(
+                ".story-cards-container"
+              );
+              const cards = document.querySelectorAll(".story-card");
+              const tabs = document.querySelectorAll(".tab");
+              let currentIndex = 0;
+              let isScrolling = false;
+
+              // Update active states based on scroll position
+              function updateActiveStates() {
+                const scrollPosition = container.scrollTop;
+                const cardHeight = container.offsetHeight;
+
+                currentIndex = Math.round(scrollPosition / cardHeight);
+
+                cards.forEach((card, index) => {
+                  if (index === currentIndex) {
+                    card.classList.add("active");
+                  } else {
+                    card.classList.remove("active");
+                  }
+                });
+
+                tabs.forEach((tab, index) => {
+                  if (index === currentIndex) {
+                    tab.classList.add("active");
+                  } else {
+                    tab.classList.remove("active");
+                  }
+                });
+              }
+
+              // Smooth scroll to card
+              function scrollToCard(index) {
+                const cardHeight = container.offsetHeight;
+                container.scrollTo({
+                  top: index * cardHeight,
+                  behavior: "smooth",
+                });
+              }
+
+              // Handle tab clicks
+              tabs.forEach((tab, index) => {
+                tab.addEventListener("click", () => {
+                  scrollToCard(index);
+                });
+              });
+
+              // Handle scroll events
+              container.addEventListener("scroll", () => {
+                if (!isScrolling) {
+                  window.requestAnimationFrame(() => {
+                    updateActiveStates();
+                    isScrolling = false;
+                  });
+                }
+                isScrolling = true;
+              });
+
+              // Initialize first card as active
+              updateActiveStates();
+            });
+          </script>
         </div>
       </section>
 
@@ -2431,118 +2768,31 @@
             <div class="partners-column">
               <h2 class="section-title">Trusted by students admitted to</h2>
               <div class="partners-grid">
-                <div class="partner-item">
-                  <div class="partner-icon">
-                    <svg
-                      width="40"
-                      height="40"
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M20 5L4 12L20 19L36 12L20 5Z"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                      <path
-                        d="M10 15V25M30 15V25"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                      <path
-                        d="M4 12V28L20 35L36 28V12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <span>Harvard</span>
-                </div>
-                <div class="partner-item">
-                  <div class="partner-icon">
-                    <svg
-                      width="40"
-                      height="40"
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M20 5L4 12L20 19L36 12L20 5Z"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                      <path
-                        d="M10 15V25M30 15V25"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                      <path
-                        d="M4 12V28L20 35L36 28V12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <span>Yale</span>
-                </div>
-                <div class="partner-item">
-                  <div class="partner-icon">
-                    <svg
-                      width="40"
-                      height="40"
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M20 5L4 12L20 19L36 12L20 5Z"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                      <path
-                        d="M10 15V25M30 15V25"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                      <path
-                        d="M4 12V28L20 35L36 28V12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <span>Princeton</span>
-                </div>
-                <div class="partner-item">
-                  <div class="partner-icon">
-                    <svg
-                      width="40"
-                      height="40"
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M20 5L4 12L20 19L36 12L20 5Z"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                      <path
-                        d="M10 15V25M30 15V25"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                      <path
-                        d="M4 12V28L20 35L36 28V12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <span>Penn</span>
-                </div>
+                <img
+                  src="https://via.placeholder.com/120x40"
+                  alt="Harvard University"
+                  class="partner-logo"
+                />
+                <img
+                  src="https://via.placeholder.com/120x40"
+                  alt="Stanford University"
+                  class="partner-logo"
+                />
+                <img
+                  src="https://via.placeholder.com/120x40"
+                  alt="MIT"
+                  class="partner-logo"
+                />
+                <img
+                  src="https://via.placeholder.com/120x40"
+                  alt="Yale University"
+                  class="partner-logo"
+                />
+                <img
+                  src="https://via.placeholder.com/120x40"
+                  alt="Princeton University"
+                  class="partner-logo"
+                />
               </div>
             </div>
             <div class="partners-divider"></div>
