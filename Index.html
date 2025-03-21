@@ -535,7 +535,7 @@
       }
 
       .connection-line {
-        width: 200px; /* Reduced from 160px */
+        width: 140px;
         height: 2px;
         background: linear-gradient(90deg, var(--primary), var(--secondary));
         position: relative;
@@ -544,7 +544,7 @@
       .connection-line::after {
         content: "";
         position: absolute;
-        right: -3px;
+        right: -6px;
         top: 50%;
         transform: translateY(-50%);
         width: 0;
@@ -559,7 +559,7 @@
         flex-direction: column;
         align-items: center;
         gap: 16px;
-        margin: 0 300px 0 10px; /* Adjusted margins to shift left */
+        margin: 0 30px 0 10px;
       }
 
       /* Floating Stats Animation */
@@ -2511,7 +2511,7 @@
       }
 
       .connection-line {
-        width: 140px; /* Reduced from 160px */
+        width: 140px;
         height: 2px;
         background: linear-gradient(90deg, var(--primary), var(--secondary));
         position: relative;
@@ -2535,7 +2535,7 @@
         flex-direction: column;
         align-items: center;
         gap: 16px;
-        margin: 0 30px 0 10px; /* Adjusted margins to shift left */
+        margin: 0 30px 0 10px;
       }
 
       .connection-details {
@@ -3332,6 +3332,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        // Set up Google Drive video
         function setupGoogleDriveVideo(videoId) {
           const videoFrame = document.getElementById("demo-video");
           if (videoFrame) {
@@ -3341,12 +3342,14 @@
 
         setupGoogleDriveVideo("1XFmO_8gGNOUpsqp_rYG-sn2Z_2cDvDle");
 
+        // Initialize AOS
         AOS.init({
           duration: 800,
           once: true,
           offset: 100,
         });
 
+        // Handle loading screen
         const loadingScreen = document.querySelector(".loading");
         if (loadingScreen) {
           setTimeout(() => {
@@ -3355,7 +3358,7 @@
           }, 1000);
         }
 
-        // Basic scroll handling
+        // Handle header scroll effect
         window.addEventListener("scroll", function () {
           const header = document.querySelector("header");
           if (header) {
@@ -3367,27 +3370,18 @@
           }
         });
 
-        // Handle image errors
-        document.querySelectorAll("img").forEach((img) => {
-          img.onerror = function () {
-            this.style.display = "none";
-          };
-        });
-      });
-
-      document.addEventListener("DOMContentLoaded", function () {
-        const container = document.querySelector(".story-cards-container");
+        // Story cards navigation
         const cards = document.querySelectorAll(".story-card");
         const tabs = document.querySelectorAll(".tab");
         let currentIndex = 0;
         let lastScrollTime = Date.now();
-        const scrollCooldown = 800; // ms between scroll events
+        const scrollCooldown = 800;
         let hasReachedLastCard = false;
 
         // Set initial active card
         updateActiveStates();
 
-        // Prevent default scroll on the whole page when in hero section
+        // Handle story card scrolling
         document.querySelector(".hero").addEventListener(
           "wheel",
           function (e) {
@@ -3398,12 +3392,10 @@
             }
             lastScrollTime = now;
 
-            // If we've reached the last card and trying to scroll down, allow natural scroll
             if (currentIndex === cards.length - 1 && e.deltaY > 0) {
               if (!hasReachedLastCard) {
                 e.preventDefault();
                 hasReachedLastCard = true;
-                // Smooth scroll to the next section
                 const nextSection = document.querySelector(".cta");
                 if (nextSection) {
                   nextSection.scrollIntoView({ behavior: "smooth" });
@@ -3412,19 +3404,15 @@
               return;
             }
 
-            // Reset the flag when scrolling up from bottom
             if (e.deltaY < 0 && hasReachedLastCard) {
               hasReachedLastCard = false;
             }
 
             e.preventDefault();
 
-            // Determine scroll direction
             if (e.deltaY > 0) {
-              // Scroll down
               currentIndex = Math.min(currentIndex + 1, cards.length - 1);
             } else {
-              // Scroll up
               currentIndex = Math.max(currentIndex - 1, 0);
             }
 
@@ -3433,7 +3421,6 @@
           { passive: false }
         );
 
-        // Update active states based on current index
         function updateActiveStates() {
           cards.forEach((card, index) => {
             if (index === currentIndex) {
