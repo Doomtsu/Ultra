@@ -3506,16 +3506,39 @@
                   let isScrolling = false;
                   let lastScrollTime = Date.now();
                   const scrollCooldown = 800; // ms between scroll events
+                  let hasReachedLastCard = false;
 
                   // Prevent default scroll on the whole page when in hero section
                   document.querySelector(".hero").addEventListener(
                     "wheel",
                     function (e) {
-                      e.preventDefault();
-
                       const now = Date.now();
-                      if (now - lastScrollTime < scrollCooldown) return;
+                      if (now - lastScrollTime < scrollCooldown) {
+                        e.preventDefault();
+                        return;
+                      }
                       lastScrollTime = now;
+
+                      // If we've reached the last card and trying to scroll down, allow natural scroll
+                      if (currentIndex === cards.length - 1 && e.deltaY > 0) {
+                        if (!hasReachedLastCard) {
+                          e.preventDefault();
+                          hasReachedLastCard = true;
+                          // Smooth scroll to the next section
+                          const nextSection = document.querySelector(".cta");
+                          if (nextSection) {
+                            nextSection.scrollIntoView({ behavior: "smooth" });
+                          }
+                        }
+                        return;
+                      }
+
+                      // Reset the flag when scrolling up from bottom
+                      if (e.deltaY < 0 && hasReachedLastCard) {
+                        hasReachedLastCard = false;
+                      }
+
+                      e.preventDefault();
 
                       // Determine scroll direction
                       if (e.deltaY > 0) {
@@ -3568,6 +3591,7 @@
                     tab.addEventListener("click", () => {
                       currentIndex = index;
                       scrollToCard(index);
+                      hasReachedLastCard = false;
                     });
                   });
 
