@@ -257,6 +257,8 @@
         padding: 120px 0 80px;
         display: flex;
         align-items: center;
+        position: relative;
+        overflow: hidden;
       }
 
       .hero-split {
@@ -347,7 +349,7 @@
       .story-cards-container {
         position: relative;
         height: 100%;
-        overflow-y: auto;
+        overflow-y: hidden;
         scroll-snap-type: y mandatory;
         scrollbar-width: none; /* Firefox */
         -ms-overflow-style: none; /* IE and Edge */
@@ -3502,14 +3504,38 @@
                   const tabs = document.querySelectorAll(".tab");
                   let currentIndex = 0;
                   let isScrolling = false;
+                  let lastScrollTime = Date.now();
+                  const scrollCooldown = 800; // ms between scroll events
 
-                  // Update active states based on scroll position
+                  // Prevent default scroll on the whole page when in hero section
+                  document.querySelector(".hero").addEventListener(
+                    "wheel",
+                    function (e) {
+                      e.preventDefault();
+
+                      const now = Date.now();
+                      if (now - lastScrollTime < scrollCooldown) return;
+                      lastScrollTime = now;
+
+                      // Determine scroll direction
+                      if (e.deltaY > 0) {
+                        // Scroll down
+                        currentIndex = Math.min(
+                          currentIndex + 1,
+                          cards.length - 1
+                        );
+                      } else {
+                        // Scroll up
+                        currentIndex = Math.max(currentIndex - 1, 0);
+                      }
+
+                      scrollToCard(currentIndex);
+                    },
+                    { passive: false }
+                  );
+
+                  // Update active states based on current index
                   function updateActiveStates() {
-                    const scrollPosition = container.scrollTop;
-                    const cardHeight = container.offsetHeight;
-
-                    currentIndex = Math.round(scrollPosition / cardHeight);
-
                     cards.forEach((card, index) => {
                       if (index === currentIndex) {
                         card.classList.add("active");
@@ -3534,24 +3560,15 @@
                       top: index * cardHeight,
                       behavior: "smooth",
                     });
+                    updateActiveStates();
                   }
 
                   // Handle tab clicks
                   tabs.forEach((tab, index) => {
                     tab.addEventListener("click", () => {
+                      currentIndex = index;
                       scrollToCard(index);
                     });
-                  });
-
-                  // Handle scroll events
-                  container.addEventListener("scroll", () => {
-                    if (!isScrolling) {
-                      window.requestAnimationFrame(() => {
-                        updateActiveStates();
-                        isScrolling = false;
-                      });
-                    }
-                    isScrolling = true;
                   });
 
                   // Initialize first card as active
