@@ -468,14 +468,14 @@
       .connector-line::after {
         content: "";
         position: absolute;
-        right: -10px;
+        right: -6px;
         top: 50%;
         transform: translateY(-50%);
         width: 0;
         height: 0;
-        border-left: 10px solid var(--secondary);
-        border-top: 6px solid transparent;
-        border-bottom: 6px solid transparent;
+        border-left: 6px solid var(--secondary);
+        border-top: 3px solid transparent;
+        border-bottom: 3px solid transparent;
       }
 
       .pathway-timeline {
@@ -548,21 +548,31 @@
       }
 
       .connection-line {
-        position: absolute;
-        background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
+        width: 200px; /* Reduced from 160px */
         height: 2px;
-        opacity: 0.3;
-        animation: pulseLine 2s infinite;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        position: relative;
       }
 
-      @keyframes pulseLine {
-        0%,
-        100% {
-          opacity: 0.3;
-        }
-        50% {
-          opacity: 0.6;
-        }
+      .connection-line::after {
+        content: "";
+        position: absolute;
+        right: -3px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-left: 6px solid var(--secondary);
+        border-top: 3px solid transparent;
+        border-bottom: 3px solid transparent;
+      }
+
+      .connection-middle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        margin: 0 300px 0 10px; /* Adjusted margins to shift left */
       }
 
       /* Floating Stats Animation */
@@ -2514,7 +2524,7 @@
       }
 
       .connection-line {
-        width: 200px;
+        width: 140px; /* Reduced from 160px */
         height: 2px;
         background: linear-gradient(90deg, var(--primary), var(--secondary));
         position: relative;
@@ -2523,14 +2533,22 @@
       .connection-line::after {
         content: "";
         position: absolute;
-        right: -10px;
+        right: -6px;
         top: 50%;
         transform: translateY(-50%);
         width: 0;
         height: 0;
-        border-left: 10px solid var(--secondary);
-        border-top: 6px solid transparent;
-        border-bottom: 6px solid transparent;
+        border-left: 6px solid var(--secondary);
+        border-top: 3px solid transparent;
+        border-bottom: 3px solid transparent;
+      }
+
+      .connection-middle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        margin: 0 30px 0 10px; /* Adjusted margins to shift left */
       }
 
       .connection-details {
