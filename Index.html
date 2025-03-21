@@ -336,28 +336,44 @@
 
       .story-tabs {
         position: absolute;
-        bottom: 16px;
+        bottom: 24px;
         left: 50%;
         transform: translateX(-50%);
         display: flex;
-        gap: 8px;
+        gap: 12px;
         z-index: 10;
+        background: rgba(20, 20, 20, 0.7);
+        padding: 6px;
+        border-radius: 100px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
       }
 
       .tab {
-        padding: 6px 12px;
+        padding: 8px 20px;
         border-radius: 100px;
-        background: rgba(255, 255, 255, 0.1);
+        background: transparent;
         border: none;
-        color: var(--text);
+        color: rgba(255, 255, 255, 0.6);
         cursor: pointer;
-        font-size: 13px;
+        font-size: 14px;
+        font-weight: 500;
         transition: all 0.3s ease;
+        white-space: nowrap;
+      }
+
+      .tab:hover {
+        color: rgba(255, 255, 255, 0.9);
       }
 
       .tab.active {
-        background: var(--primary);
-        color: white;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+      }
+
+      /* Add smooth transition for tab switching */
+      .story-card {
+        transition: opacity 0.3s ease, visibility 0.3s ease;
       }
 
       .feature-block {
@@ -3054,7 +3070,7 @@
                   <div class="network-visualization">
                     <div class="opportunities-grid">
                       <div class="opportunity-category">
-                        <h4>🎓 3000+ Extracurriculars</h4>
+                        <h4>🎓3000+ Extracurriculars</h4>
                         <p>Curated database of prestigious opportunities</p>
                       </div>
                       <div class="opportunity-category">
