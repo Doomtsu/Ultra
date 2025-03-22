@@ -2532,7 +2532,7 @@
         grid-template-columns: repeat(4, 1fr);
         gap: 24px;
         align-items: center;
-        justify-items: center;
+        justify-items: start; /* Changed from center to start */
       }
 
       .logo-item {
@@ -2559,6 +2559,12 @@
         filter: brightness(0) invert(1);
       }
 
+      .logo-item span {
+        font-size: 12px;
+        font-weight: 500;
+        text-align: left; /* Changed from center to left */
+      }
+
       .university img {
         filter: brightness(0) invert(1);
       }
@@ -2574,6 +2580,7 @@
         font-size: 18px;
         margin-bottom: 16px;
         color: var(--text);
+        text-align: left; /* Added explicit left alignment */
       }
 
       .opportunity-stats {
@@ -2584,16 +2591,11 @@
       }
 
       .stat-item {
-        text-align: center;
+        text-align: left; /* Changed from center to left */
         padding: 20px;
         background: rgba(255, 255, 255, 0.05);
         border-radius: 12px;
         transition: all 0.3s ease;
-      }
-
-      .stat-item:hover {
-        transform: translateY(-5px);
-        background: rgba(255, 255, 255, 0.1);
       }
 
       .stat-item h4 {
@@ -2620,16 +2622,11 @@
       }
 
       .metric-item {
-        text-align: center;
+        text-align: left; /* Changed from center to left */
         padding: 24px;
         background: rgba(255, 255, 255, 0.05);
         border-radius: 16px;
         transition: all 0.3s ease;
-      }
-
-      .metric-item:hover {
-        transform: translateY(-5px);
-        background: rgba(255, 255, 255, 0.1);
       }
 
       .metric-value {
@@ -2672,6 +2669,7 @@
         color: var(--text);
         margin-bottom: 16px;
         font-style: italic;
+        text-align: left; /* Added explicit left alignment */
       }
 
       .testimonial-author {
@@ -2680,16 +2678,10 @@
         gap: 12px;
       }
 
-      .author-photo {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
-
       .author-info {
         display: flex;
         flex-direction: column;
+        text-align: left; /* Added explicit left alignment */
       }
 
       .author-name {
@@ -2808,7 +2800,7 @@
         background: rgba(255, 255, 255, 0.05);
         padding: 12px;
         border-radius: 16px;
-        text-align: center;
+        text-align: left; /* Changed from center to left */
       }
 
       .opportunity-category h4 {
@@ -2829,7 +2821,7 @@
       }
 
       .stat {
-        text-align: center;
+        text-align: left; /* Changed from center to left */
       }
 
       .stat h4 {
@@ -2848,6 +2840,7 @@
         background: rgba(255, 255, 255, 0.05);
         padding: 12px;
         border-radius: 16px;
+        text-align: left; /* Added explicit left alignment */
       }
 
       .strategy-point h4 {
@@ -2894,7 +2887,7 @@
       .hero-cta {
         margin: 32px 0;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start; /* Changed from center to flex-start */
       }
 
       .btn-primary.btn-large {
@@ -2913,9 +2906,9 @@
 
       /* Trusted by section */
       .trusted-by {
-        margin: 30px auto 0;
+        margin: 30px 0 0; /* Removed auto from margin */
         max-width: 600px;
-        text-align: center;
+        text-align: left; /* Changed from center to left */
       }
 
       .trusted-by-text {
@@ -2928,10 +2921,10 @@
 
       .logo-grid {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start; /* Changed from center to flex-start */
         align-items: center;
         gap: 30px;
-        margin: 0 auto;
+        margin: 0; /* Removed auto from margin */
       }
 
       .partner-logo {
