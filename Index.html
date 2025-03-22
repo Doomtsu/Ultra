@@ -3425,14 +3425,25 @@
         let lastScrollTime = Date.now();
         const scrollCooldown = 800;
         let hasReachedLastCard = false;
+        let isInHeroSection = true;
 
         // Set initial active card
         updateActiveStates();
 
         // Handle story card scrolling
-        document.querySelector(".hero").addEventListener(
+        document.addEventListener(
           "wheel",
           function (e) {
+            // Check if we're in the hero section
+            const heroSection = document.querySelector(".hero");
+            const heroRect = heroSection.getBoundingClientRect();
+            isInHeroSection =
+              heroRect.top <= 0 && heroRect.bottom >= window.innerHeight;
+
+            if (!isInHeroSection) {
+              return; // Allow normal scrolling if not in hero section
+            }
+
             const now = Date.now();
             if (now - lastScrollTime < scrollCooldown) {
               e.preventDefault();
@@ -3459,6 +3470,62 @@
             e.preventDefault();
 
             if (e.deltaY > 0) {
+              currentIndex = Math.min(currentIndex + 1, cards.length - 1);
+            } else {
+              currentIndex = Math.max(currentIndex - 1, 0);
+            }
+
+            updateActiveStates();
+          },
+          { passive: false }
+        );
+
+        // Handle touch events for mobile
+        let touchStartY = 0;
+        document.addEventListener(
+          "touchstart",
+          function (e) {
+            touchStartY = e.touches[0].clientY;
+          },
+          { passive: true }
+        );
+
+        document.addEventListener(
+          "touchmove",
+          function (e) {
+            if (!isInHeroSection) return;
+
+            const touchEndY = e.touches[0].clientY;
+            const deltaY = touchStartY - touchEndY;
+
+            if (Math.abs(deltaY) < 50) return; // Minimum swipe distance
+
+            const now = Date.now();
+            if (now - lastScrollTime < scrollCooldown) {
+              e.preventDefault();
+              return;
+            }
+            lastScrollTime = now;
+
+            if (currentIndex === cards.length - 1 && deltaY > 0) {
+              if (!hasReachedLastCard) {
+                e.preventDefault();
+                hasReachedLastCard = true;
+                const nextSection = document.querySelector(".cta");
+                if (nextSection) {
+                  nextSection.scrollIntoView({ behavior: "smooth" });
+                }
+              }
+              return;
+            }
+
+            if (deltaY < 0 && hasReachedLastCard) {
+              hasReachedLastCard = false;
+            }
+
+            e.preventDefault();
+
+            if (deltaY > 0) {
               currentIndex = Math.min(currentIndex + 1, cards.length - 1);
             } else {
               currentIndex = Math.max(currentIndex - 1, 0);
