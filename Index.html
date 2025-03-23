@@ -119,6 +119,102 @@
         }
       }
 
+      /* Light Ray Effect */
+      .light-rays {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .light-ray {
+        position: absolute;
+        top: -10%;
+        right: -10%;
+        width: 60%;
+        height: 120%;
+        background: linear-gradient(
+          135deg,
+          rgba(49, 132, 255, 0.12) 0%,
+          rgba(74, 144, 226, 0.08) 30%,
+          rgba(100, 180, 255, 0.05) 60%,
+          transparent 80%
+        );
+        transform-origin: top right;
+        border-radius: 20% 40% 40% 20% / 20% 20% 40% 40%;
+        filter: blur(20px);
+        animation: rayFloat 20s ease-in-out infinite;
+      }
+
+      .light-ray:nth-child(2) {
+        width: 50%;
+        height: 100%;
+        opacity: 0.7;
+        background: linear-gradient(
+          135deg,
+          rgba(86, 204, 242, 0.1) 0%,
+          rgba(47, 128, 237, 0.07) 40%,
+          transparent 80%
+        );
+        animation-delay: -5s;
+        animation-duration: 25s;
+      }
+
+      .light-ray:nth-child(3) {
+        width: 70%;
+        height: 90%;
+        opacity: 0.6;
+        background: linear-gradient(
+          135deg,
+          rgba(120, 166, 255, 0.08) 0%,
+          rgba(49, 132, 255, 0.05) 50%,
+          transparent 85%
+        );
+        animation-delay: -10s;
+        animation-duration: 30s;
+      }
+
+      @keyframes rayFloat {
+        0%, 100% {
+          transform: rotate(-15deg) scale(1);
+          border-radius: 20% 40% 40% 20% / 20% 20% 40% 40%;
+          filter: blur(20px) brightness(1);
+        }
+        25% {
+          transform: rotate(-10deg) scale(1.05);
+          border-radius: 30% 30% 40% 20% / 30% 30% 40% 20%;
+          filter: blur(22px) brightness(1.1);
+        }
+        50% {
+          transform: rotate(-20deg) scale(1.1);
+          border-radius: 40% 20% 30% 30% / 20% 20% 40% 40%;
+          filter: blur(25px) brightness(1.2);
+        }
+        75% {
+          transform: rotate(-5deg) scale(1.05);
+          border-radius: 20% 40% 30% 30% / 30% 30% 20% 40%;
+          filter: blur(22px) brightness(1.1);
+        }
+      }
+
+      /* Twinkling Stars Effect Enhancement */
+      .star {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        opacity: 0;
+        animation: twinkle 5s infinite;
+      }
+
+      @keyframes twinkle {
+        0%, 100% { opacity: 0; transform: scale(0.5); }
+        50% { opacity: 0.8; transform: scale(1); }
+      }
+
       .wrapper {
         position: relative;
         min-height: 100vh;
@@ -1207,7 +1303,12 @@
     <!-- Scroll Progress Bar -->
     <div class="scroll-progress"></div>
 
-  
+    <!-- Light Ray Effect -->
+    <div class="light-rays">
+      <div class="light-ray"></div>
+      <div class="light-ray"></div>
+      <div class="light-ray"></div>
+    </div>
 
     <div class="wrapper">
       <!-- Animated Background -->
@@ -1460,7 +1561,48 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Set up Google Drive video
+        // Create twinkling stars
+        function createStars() {
+          const starsContainer = document.createElement('div');
+          starsContainer.className = 'stars-container';
+          starsContainer.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden; pointer-events: none;';
+          document.body.appendChild(starsContainer);
+          
+          // Create 100 random stars
+          for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            // Random position
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            
+            // Random size (0.5px to 2px)
+            const size = 0.5 + Math.random() * 1.5;
+            
+            // Random delay for twinkling
+            const delay = Math.random() * 5;
+            
+            // Random duration for twinkling (3-8s)
+            const duration = 3 + Math.random() * 5;
+            
+            star.style.cssText = `
+              left: ${x}%;
+              top: ${y}%;
+              width: ${size}px;
+              height: ${size}px;
+              animation: twinkle ${duration}s infinite;
+              animation-delay: ${delay}s;
+            `;
+            
+            starsContainer.appendChild(star);
+          }
+        }
+        
+        // Call the function to create stars
+        createStars();
+
+        // Function to set up Google Drive video
         function setupGoogleDriveVideo(videoId) {
           const videoFrame = document.getElementById("demo-video");
           if (videoFrame) {
