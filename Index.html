@@ -361,17 +361,56 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 24px;
         padding: 20px;
-        padding-bottom: 160px;
+        padding-bottom: 220px;
         opacity: 0;
         visibility: hidden;
         transition: all 0.5s ease;
         pointer-events: none;
+        transition: padding-top 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
       }
 
       .story-card.active {
         opacity: 1;
         visibility: visible;
         pointer-events: all;
+      }
+
+      .story-card.tab-elevated {
+        padding-top: 80px;
+      }
+
+      /* Extra padding for Network and Strategy cards */
+      #card-network.tab-elevated,
+      #card-strategy.tab-elevated {
+        padding-top: 120px;
+      }
+
+      /* Even more padding for Strategy card when it's the last card */
+      #card-strategy.tab-elevated[data-index="3"] {
+        padding-top: 210px;
+      }
+
+      .story-card > div {
+        transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+
+      .story-card.tab-elevated > div {
+        transform: translateY(0);
+      }
+
+      .story-card.active > div {
+        animation: slideContentDown 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+      }
+
+      @keyframes slideContentDown {
+        from {
+          transform: translateY(-40px);
+          opacity: 0.6;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
       }
 
       .story-tabs {
@@ -388,6 +427,7 @@
         border-bottom-left-radius: 24px;
         border-bottom-right-radius: 24px;
         overflow: hidden;
+        transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
       }
 
       .tab {
@@ -400,9 +440,10 @@
         font-weight: 500;
         transition: all 0.3s ease;
         white-space: nowrap;
-        text-align: left;
         width: 100%;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
+        position: relative;
+        text-align: left;
       }
 
       .tab:hover {
@@ -411,6 +452,67 @@
       }
 
       .tab.active {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+      }
+
+      .tab.scrolled-past {
+        position: absolute;
+        top: 0;
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .story-tabs.elevated {
+        transform: translateY(-100%);
+      }
+
+      .elevated-tabs-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        background: rgba(20, 20, 20, 0.95);
+        backdrop-filter: blur(10px);
+        border-top-left-radius: 24px;
+        border-top-right-radius: 24px;
+        overflow: hidden;
+        z-index: 11;
+        opacity: 0;
+        transform: translateY(-100%);
+        transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+
+      .elevated-tabs-container.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .elevated-tab {
+        padding: 12px 24px 12px 16px;
+        background: transparent;
+        border: none;
+        color: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        text-align: left;
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .elevated-tab:hover {
+        color: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .elevated-tab.active {
         background: rgba(255, 255, 255, 0.1);
         color: #fff;
       }
@@ -430,6 +532,26 @@
 
       .network-stats {
         margin-bottom: 60px;
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+      }
+
+      .stat {
+        text-align: center;
+      }
+
+      .stat h4 {
+        font-size: 24px;
+        color: var(--primary);
+        margin-bottom: 8px;
+        text-align: center;
+      }
+
+      .stat p {
+        font-size: 14px;
+        color: var(--text-secondary);
+        text-align: center;
       }
 
       .video-container {
@@ -832,10 +954,10 @@
       @keyframes float {
         0%,
         100% {
-          transform: translateY(0) rotateX(0);
+          transform: translateY(0);
         }
         50% {
-          transform: translateY(-10px) rotateX(2deg);
+          transform: translateY(-20px);
         }
       }
 
@@ -961,7 +1083,7 @@
         content: "";
         position: absolute;
         top: 0;
-        left: 0;
+        left: -100%;
         width: 100%;
         height: 100%;
         background: linear-gradient(
@@ -1033,11 +1155,6 @@
       .feature-list li:hover {
         color: var(--text);
         transform: translateX(5px);
-      }
-
-      .feature-list li svg {
-        flex-shrink: 0;
-        margin-top: 3px;
       }
 
       /* Enhanced Simulation Section */
@@ -1955,121 +2072,6 @@
         }
       }
 
-      /* Loading Animation */
-      .loading {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--background);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        transition: opacity 0.5s ease;
-      }
-
-      .loading.hidden {
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      .loading-spinner {
-        width: 50px;
-        height: 50px;
-        border: 3px solid rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-        border-top-color: var(--primary);
-        animation: spin 1s linear infinite;
-      }
-
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      /* Scroll Progress Bar */
-      .scroll-progress {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: linear-gradient(to right, var(--primary), var(--secondary));
-        transform-origin: 0%;
-        transform: scaleX(0);
-        z-index: 1000;
-        transition: transform 0.1s ease;
-      }
-
-      /* Back to Top Button */
-      .back-to-top {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 50px;
-        height: 50px;
-        background: var(--gradient-1);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 1000;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      }
-
-      .back-to-top.visible {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      .back-to-top:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-      }
-
-      .back-to-top svg {
-        width: 24px;
-        height: 24px;
-        color: var(--text);
-      }
-
-      /* Add these new animation styles */
-      @keyframes float {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-20px);
-        }
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.05);
-        }
-      }
-
-      @keyframes shine {
-        0% {
-          transform: translateX(-100%) rotate(45deg);
-        }
-        100% {
-          transform: translateX(100%) rotate(45deg);
-        }
-      }
-
       .feature-card,
       .testimonial-card,
       .opportunity-card {
@@ -2630,7 +2632,6 @@
 
       .stat-item h4 {
         font-size: 24px;
-        font-weight: 700;
         color: var(--primary);
         margin-bottom: 8px;
       }
@@ -2988,6 +2989,91 @@
         color: var(--text-secondary);
         margin-bottom: 16px;
       }
+
+      /* Loading Animation */
+      .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--background);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease;
+      }
+
+      .loading.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        border-top-color: var(--primary);
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Scroll Progress Bar */
+      .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        transform-origin: 0%;
+        transform: scaleX(0);
+        z-index: 1000;
+        transition: transform 0.1s ease;
+      }
+
+      /* Back to Top Button */
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: var(--gradient-1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 1000;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .back-to-top svg {
+        width: 24px;
+        height: 24px;
+        color: var(--text);
+      }
     </style>
   </head>
   <body>
@@ -3100,6 +3186,12 @@
           </div>
 
           <div class="hero-cases">
+            <div class="elevated-tabs-container">
+              <button class="elevated-tab" data-index="0">Simulation</button>
+              <button class="elevated-tab" data-index="1">Network</button>
+              <button class="elevated-tab" data-index="2">Case Study</button>
+              <button class="elevated-tab" data-index="3">Strategy</button>
+            </div>
             <div class="story-cards-container">
               <!-- Card 1: Admissions Simulation -->
               <div class="story-card" id="card-simulation" data-index="0">
@@ -3422,19 +3514,73 @@
             } else {
               card.classList.remove("active");
             }
+
+            // Add padding-top to cards whose tabs have moved up
+            if (index <= currentIndex) {
+              card.classList.add("tab-elevated");
+            } else {
+              card.classList.remove("tab-elevated");
+            }
           });
 
+          // Handle bottom tabs
           tabs.forEach((tab, index) => {
             if (index === currentIndex) {
               tab.classList.add("active");
             } else {
               tab.classList.remove("active");
             }
+            
+            // Hide first tab and tabs that have moved to the top
+            if (index === 0 || index <= currentIndex) {
+              tab.style.display = "none";
+            } else {
+              tab.style.display = "block";
+            }
           });
+          
+          // Handle elevated tabs visibility one by one
+          const elevatedTabs = document.querySelectorAll(".elevated-tab");
+          elevatedTabs.forEach((tab, index) => {
+            if (index === currentIndex) {
+              tab.classList.add("active");
+            } else {
+              tab.classList.remove("active");
+            }
+            
+            // Show first tab and tabs up to current index at the top
+            if (index === 0 || index <= currentIndex) {
+              tab.style.display = "block";
+            } else {
+              tab.style.display = "none";
+            }
+          });
+          
+          // Show elevated tabs container when on first card or after
+          const elevatedTabsContainer = document.querySelector(".elevated-tabs-container");
+          elevatedTabsContainer.classList.add("visible");
+          
+          // Move original tabs up when more than half of them are scrolled past
+          const storyTabs = document.querySelector(".story-tabs");
+          if (currentIndex > Math.floor(tabs.length / 2)) {
+            storyTabs.classList.add("elevated");
+          } else {
+            storyTabs.classList.remove("elevated");
+          }
         }
 
         // Handle tab clicks
         tabs.forEach((tab, index) => {
+          tab.addEventListener("click", () => {
+            currentIndex = index;
+            hasReachedLastCard = false;
+            updateActiveStates();
+          });
+        });
+        
+        // Handle elevated tab clicks
+        const elevatedTabs = document.querySelectorAll(".elevated-tab");
+        elevatedTabs.forEach((tab, index) => {
           tab.addEventListener("click", () => {
             currentIndex = index;
             hasReachedLastCard = false;
